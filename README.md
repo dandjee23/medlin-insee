@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -76,3 +77,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 =======
 # medlin
 >>>>>>> e61d16c69c5fb89971b63c4e56cc50afcd8bb006
+=======
+Medlin-insee
+>>>>>>> d6cdbbbda30b5bcca362020a5ac023c823f82504
