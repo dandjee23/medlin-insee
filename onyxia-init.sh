@@ -7,3 +7,5 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 20
 
 npm install -g yarn
+
+yarn
