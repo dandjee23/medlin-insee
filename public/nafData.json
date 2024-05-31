@@ -1583,7 +1583,9 @@
   "84.1": [
     { "value": "84.11", "label": "84.11 - Administration publique générale" },
     { "value": "84.12", "label": "84.12 - Régulation des activités de santé, d'enseignement, culturelles et sociales, autre que sécurité sociale" },
-    { "value": "84.13", "label": "84.13 - Administration publique (tutelle) des activités économiques" },
+    { "value": "84.13", "label": "84.13 - Administration publique (tutelle) des activités économiques" }
+  ],
+  "84.2": [
     { "value": "84.21", "label": "84.21 - Affaires étrangères" },
     { "value": "84.22", "label": "84.22 - Défense" },
     { "value": "84.23", "label": "84.23 - Justice" },
