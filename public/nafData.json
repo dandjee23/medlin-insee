@@ -1469,6 +1469,9 @@
     { "value": "68.10", "label": "68.10 - Activités des marchands de biens immobiliers" },
     { "value": "68.20", "label": "68.20 - Location et exploitation de biens immobiliers propres ou loués" }
   ],
+  "68.2": [
+    { "value": "68.20", "label": "68.20 - Location et exploitation de biens immobiliers propres ou loués" }
+  ],
   "68.3": [
     { "value": "68.31", "label": "68.31 - Agences immobilières" },
     { "value": "68.32", "label": "68.32 - Administration d'immeubles et autres biens immobiliers" }

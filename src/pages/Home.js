@@ -61,6 +61,7 @@ const Home = () => {
       </Grid>
       <br />
       <br />
+      <br />
       <Box sx={{ mt: 4, textAlign: 'center' }}>
         <Button variant="contained" size="large" onClick={handleStartStudy}>
           Commencer l'étude
