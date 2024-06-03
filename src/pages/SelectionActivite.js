@@ -154,7 +154,7 @@ const SelectionActivite = () => {
       </Box>
 
       {selectedSubclass && (
-        <Paper elevation={0} style={{ padding: '4px 8px', marginBottom: '16px', width: 'fit-content', border: '1px solid #ccc' }}>
+        <Paper elevation={0} style={{ padding: '4px 8px', marginBottom: '16px', width: 'fit-content', border: '1px solid #ccc', borderLeft: '5px solid blue' }}>
           <Box display="flex" alignItems="center">
             <Typography variant="caption" style={{ marginRight: '8px' }}>
               <span style={{ color: '#286AC7', fontSize: "13px" }}>Vous avez choisi l'activité</span> : {selectedSubclass.label}

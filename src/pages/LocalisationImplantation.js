@@ -117,9 +117,9 @@ const LocalisationImplantation = () => {
   };
 
   const selectedStyle = {
-    color: 'blue',
+    color: '#286AC7',
     weight: 2,
-    fillOpacity: 0,
+    fillOpacity: 0.2,
     transition: 'all 0.3s ease',
     interactive: false
   };
@@ -133,7 +133,7 @@ const LocalisationImplantation = () => {
   };
 
   const communeStyle = {
-    color: 'black',
+    color: '#286AC7',
     weight: 1,
     fillOpacity: 0,
     transition: 'all 0.3s ease',
@@ -264,14 +264,14 @@ const LocalisationImplantation = () => {
       {validatedSelection && (
         <Box marginTop={2}>
           <Paper elevation={0} style={{ padding: '16px', marginBottom: '16px', width: 'fit-content', border: '1px solid #ccc', borderLeft: '5px solid blue', position: 'relative' }}>
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-              <Typography variant="caption" style={{ marginRight: '8px' }}>
+            <Box display="flex" flexDirection={'column'} alignItems="flex-center">
+              <Typography variant="caption" style={{ marginBottom: '4px' }}>
                 <span style={{ color: '#286AC7' }}>Département choisi</span> : {validatedSelection.department.label}
               </Typography>
               <Typography variant="caption">
                 <span style={{ color: '#286AC7' }}>Communes choisies</span> : {validatedSelection.communes.map(commune => commune.label).join(', ')}
               </Typography>
-              <IconButton onClick={handleDeleteActivity} size="small" style={{ color: 'grey', position: 'absolute', top: '-12px', right: '-12px' }}>
+              <IconButton onClick={handleDeleteActivity} size="small" style={{ color: 'grey', position: 'absolute', top: '-6px', right: '-4px' }}>
                 <CloseIcon fontSize="small" style={{ fontSize: '16px' }} />
               </IconButton>
             </Box>
@@ -296,7 +296,8 @@ const LocalisationImplantation = () => {
                   textTransform: 'none', 
                   borderBottom: '2px solid', 
                   borderColor: tabIndex === 0 ? 'blue' : 'transparent',
-                  alignSelf: 'flex-start' 
+                  alignSelf: 'flex-start',
+                  fontSize: '20px' 
                 }} 
               />
               <Tab 
@@ -306,16 +307,17 @@ const LocalisationImplantation = () => {
                   textTransform: 'none', 
                   borderBottom: '2px solid', 
                   borderColor: tabIndex === 1 ? 'blue' : 'transparent',
-                  alignSelf: 'flex-start' 
+                  alignSelf: 'flex-start',
+                  fontSize: '20px'  
                 }} 
               />
             </Tabs>
-            <Box padding={2} border={1} borderColor="divider" borderRadius={2} marginTop={1} backgroundColor="white">
+            <Box padding={2} border={1} borderColor="divider" borderRadius={2} marginTop={1} backgroundColor="white" height={600}>
               {tabIndex === 0 && (
-                <Typography variant="h5">Contenu de la tab Population</Typography>
+                <Typography variant="h5">Données Statistiques Population</Typography>
               )}
               {tabIndex === 1 && (
-                <Typography variant="h5">Contenu de la tab Entreprises</Typography>
+                <Typography variant="h5">Données Statistiques Entreprises</Typography>
               )}
             </Box>
           </Box>
