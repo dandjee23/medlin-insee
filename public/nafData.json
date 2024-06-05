@@ -1483,7 +1483,9 @@
     { "value": "69.20", "label": "69.20 - Activités comptables" }
   ],
   "70.1": [
-    { "value": "70.10", "label": "70.10 - Activités des sièges sociaux" },
+    { "value": "70.10", "label": "70.10 - Activités des sièges sociaux" }
+  ],
+  "70.2": [
     { "value": "70.21", "label": "70.21 - Conseil en relations publiques et communication" },
     { "value": "70.22", "label": "70.22 - Conseil pour les affaires et autres conseils de gestion" }
   ],

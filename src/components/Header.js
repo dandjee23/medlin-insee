@@ -18,7 +18,7 @@ const Header = ({ toggleSidebar }) => {
           color="inherit"
           aria-label="menu"
           onClick={toggleSidebar}
-          sx={{ color: '#000', mr: 0.5 }} 
+          sx={{ color: '#000', mr: 1.3 }} 
         >
           <MenuIcon />
         </IconButton>
