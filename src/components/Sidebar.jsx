@@ -77,6 +77,7 @@ const Sidebar = ({ sidebarOpen }) => {
                 selected={isActive}
                 style={{
                   justifyContent: sidebarOpen ? 'initial' : 'center',
+                  
                 }}
               >
                 <StyledListItemIcon style={{ color: isActive ? '#286AC7' : '#000' }}>
@@ -88,6 +89,7 @@ const Sidebar = ({ sidebarOpen }) => {
                     style={{
                       color: isActive ? '#286AC7' : '#000',
                       fontWeight: isActive ? 'bold' : 'normal',
+                      
                     }}
                   />
                 )}

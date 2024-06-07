@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <Container sx={{ mt: 5 }}>
-      <Typography variant="h4" component="h1" gutterBottom sx={{ textAlign: 'center', color:'#e4003a' }}>
+      <Typography variant="h4" component="h1" gutterBottom sx={{ textAlign: 'center', color:'#e4003a', fontWeight: 'bold' }}>
         Mon entreprise avec les données de l'Insee
       </Typography>
       <br />

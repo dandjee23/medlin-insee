@@ -20,13 +20,13 @@ const LocalisationImplantation = () => {
   const [hoveredCommune, setHoveredCommune] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [isDepartmentMenuOpen, setIsDepartmentMenuOpen] = useState(false);
-  const [isCommuneMenuOpen, setIsCommuneMenuOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
   const [loadingGeoJson, setLoadingGeoJson] = useState(true);
   const [loadingCommunes, setLoadingCommunes] = useState(false);
   const mapRef = useRef(null);
   const navigate = useNavigate();
 
+  // Effect to fetch department GeoJSON data on component mount
   useEffect(() => {
     axios.get('/contour-des-departements.geojson')
       .then(response => {
@@ -45,6 +45,7 @@ const LocalisationImplantation = () => {
       });
   }, []);
 
+  // Effect to load selected department and communes from localStorage
   useEffect(() => {
     const savedDepartment = localStorage.getItem('selectedDepartment');
     const savedCommunes = localStorage.getItem('selectedCommunes');
@@ -68,6 +69,7 @@ const LocalisationImplantation = () => {
     }
   }, []);
 
+  // Effect to fetch communes data when a department is selected
   useEffect(() => {
     if (selectedDepartment) {
       setCommunesGeoJsonData(null);
@@ -93,6 +95,10 @@ const LocalisationImplantation = () => {
     }
   }, [selectedDepartment]);
 
+   /**
+   * Handle department change event.
+   * @param {object} selectedOption - Selected department option.
+   */
   const handleDepartmentChange = (selectedOption) => {
     setSelectedDepartment(selectedOption);
     setSelectedCommunes([]);
@@ -101,10 +107,17 @@ const LocalisationImplantation = () => {
     localStorage.removeItem('selectedCommunes');
   };
 
+  /**
+   * Handle commune change event.
+   * @param {array} selectedOptions - Selected communes options.
+   */
   const handleCommuneChange = (selectedOptions) => {
     setSelectedCommunes(selectedOptions || []);
     setErrorMessage('');
     localStorage.setItem('selectedCommunes', JSON.stringify(selectedOptions || []));
+    if (selectedOptions && selectedOptions.length > 0) {
+      centerMapOnCommune(selectedOptions[selectedOptions.length - 1].value);
+    }
   };
 
   const handleBack = () => {
@@ -112,11 +125,23 @@ const LocalisationImplantation = () => {
   };
 
   const handleNext = () => {
-    navigate('/synthese-recherche');
+    if (!selectedDepartment) {
+      setSnackbarMessage('Veuillez sélectionner un département.');
+      setOpenSnackbar(true);
+    } else {
+      navigate('/synthese-recherche');
+    }
   };
 
+  /**
+   * Validate the current selection and navigate to the summary page.
+   */
   const handleValidate = () => {
-    if (selectedCommunes.length === 0) {
+    if (!selectedDepartment) {
+      setSnackbarMessage('Veuillez sélectionner un département.');
+      setOpenSnackbar(true);
+    } else if (selectedCommunes.length === 0) {
+      setSnackbarMessage('Veuillez sélectionner au moins une commune.');
       setOpenSnackbar(true);
     } else {
       navigate('/synthese-recherche');
@@ -127,6 +152,37 @@ const LocalisationImplantation = () => {
     setOpenSnackbar(false);
   };
 
+  /**
+   * Reset the selected department and communes.
+   */
+  const handleReset = () => {
+    setSelectedDepartment(null);
+    setSelectedCommunes([]);
+    setCommunes([]);
+    setCommunesGeoJsonData(null);
+    localStorage.removeItem('selectedDepartment');
+    localStorage.removeItem('selectedCommunes');
+  };
+
+
+  /**
+   * Center the map on a selected commune.
+   * @param {string} communeCode - Code of the commune to center on.
+   */
+  const centerMapOnCommune = useCallback((communeCode) => {
+    if (communesGeoJsonData && mapRef.current) {
+      const selectedCommuneFeature = communesGeoJsonData.features.find(
+        (feature) => feature.properties.code === communeCode
+      );
+      if (selectedCommuneFeature) {
+        const { coordinates } = selectedCommuneFeature.geometry;
+        const [lng, lat] = coordinates[0][0]; // Assuming the geometry is a polygon
+        mapRef.current.setView([lat, lng], 8); // Center the map on the selected commune
+      }
+    }
+  }, [communesGeoJsonData]);
+
+  // Styles for different map features
   const defaultStyle = {
     color: 'black',
     weight: 1,
@@ -159,11 +215,21 @@ const LocalisationImplantation = () => {
     interactive: true
   };
 
+  /**
+   * Get style for a commune feature.
+   * @param {object} feature - GeoJSON feature.
+   * @returns {object} Style object for the feature.
+   */
   const getCommuneStyle = (feature) => {
     return selectedCommunes.some(c => c?.value === feature.properties.code) ? selectedCommuneStyle :
       (hoveredCommune === feature.properties.code ? hoverStyle : communeStyle);
   };
 
+   /**
+   * Event handlers for each GeoJSON feature.
+   * @param {object} feature - GeoJSON feature.
+   * @param {object} layer - Leaflet layer.
+   */
   const onEachFeature = useCallback((feature, layer) => {
     layer.on({
       mouseover: () => {
@@ -184,10 +250,11 @@ const LocalisationImplantation = () => {
           const newSelection = [...selectedCommunes, newCommune];
           setSelectedCommunes(newSelection);
           localStorage.setItem('selectedCommunes', JSON.stringify(newSelection));
+          centerMapOnCommune(communeCode); // Center the map on the newly selected commune
         }
       }
     });
-  }, [selectedCommunes]);
+  }, [selectedCommunes, centerMapOnCommune]);
 
   return (
     <Container>
@@ -228,6 +295,8 @@ const LocalisationImplantation = () => {
           center={[46.603354, 1.888334]} 
           zoom={6} 
           style={{ height: '70vh', width: '60%', flex: 1 }}
+          scrollWheelZoom={false}
+          ref={mapRef}
           whenCreated={map => { mapRef.current = map; }}
         >
           <TileLayer
@@ -270,15 +339,12 @@ const LocalisationImplantation = () => {
                 onChange={handleDepartmentChange}
                 isSearchable
                 placeholder="Sélectionner un département"
-                menuIsOpen={isDepartmentMenuOpen}
-                onMenuOpen={() => setIsDepartmentMenuOpen(true)}
-                onMenuClose={() => setIsDepartmentMenuOpen(false)}
               />
             )}
             {selectedDepartment && (
               <>
                 <Typography variant="h6" gutterBottom style={{ marginTop: '20px' }}>
-                  Communes
+                  Commune(s)
                 </Typography>
                 {loadingCommunes ? (
                   <Skeleton variant="rectangular" height={56} />
@@ -290,14 +356,18 @@ const LocalisationImplantation = () => {
                     isMulti
                     isSearchable
                     placeholder="Sélectionner des communes"
-                    menuIsOpen={isCommuneMenuOpen}
-                    onMenuOpen={() => setIsCommuneMenuOpen(true)}
-                    onMenuClose={() => setIsCommuneMenuOpen(false)}
                   />
                 )}
               </>
             )}
-            <Box display="flex" justifyContent="flex-end" marginTop={2}>
+            <Box display="flex" justifyContent="flex-end" marginTop={5}>
+              <Button
+                variant="text"
+                onClick={handleReset}
+                style={{ marginRight: 10, borderRadius: '8px', textTransform: 'none' }}
+              >
+                Réinitialiser
+              </Button>
               <Button
                 variant="contained"
                 color="primary"
@@ -314,7 +384,7 @@ const LocalisationImplantation = () => {
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
-        message="Veuillez sélectionner au moins une commune."
+        message={snackbarMessage}
         action={
           <IconButton size="small" aria-label="close" color="inherit" onClick={handleCloseSnackbar}>
             <CloseIcon fontSize="small" />
