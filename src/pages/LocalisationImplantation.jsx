@@ -230,31 +230,49 @@ const LocalisationImplantation = () => {
    * @param {object} feature - GeoJSON feature.
    * @param {object} layer - Leaflet layer.
    */
-  const onEachFeature = useCallback((feature, layer) => {
-    layer.on({
-      mouseover: () => {
-        setHoveredCommune(feature.properties.code);
-      },
-      mouseout: () => {
-        setHoveredCommune(null);
-      },
-      click: () => {
-        const communeCode = feature.properties.code;
-        const alreadySelected = selectedCommunes.some(commune => commune?.value === communeCode);
-        if (alreadySelected) {
-          const newSelection = selectedCommunes.filter(commune => commune?.value !== communeCode);
-          setSelectedCommunes(newSelection);
-          localStorage.setItem('selectedCommunes', JSON.stringify(newSelection));
-        } else {
-          const newCommune = { value: communeCode, label: `${communeCode} - ${feature.properties.nom}` };
-          const newSelection = [...selectedCommunes, newCommune];
-          setSelectedCommunes(newSelection);
-          localStorage.setItem('selectedCommunes', JSON.stringify(newSelection));
-          centerMapOnCommune(communeCode); // Center the map on the newly selected commune
-        }
-      }
-    });
-  }, [selectedCommunes, centerMapOnCommune]);
+   const onEachFeature = useCallback(
+    (feature, layer) => {
+      layer.on({
+        mouseover: () => {
+          setHoveredCommune(feature.properties.code);
+        },
+        mouseout: () => {
+          setHoveredCommune(null);
+        },
+        click: () => {
+          const communeCode = feature.properties.code;
+          setSelectedCommunes((prevSelectedCommunes) => {
+            const alreadySelected = prevSelectedCommunes.some(
+              (commune) => commune?.value === communeCode
+            );
+            if (alreadySelected) {
+              const newSelection = prevSelectedCommunes.filter(
+                (commune) => commune?.value !== communeCode
+              );
+              localStorage.setItem(
+                "selectedCommunes",
+                JSON.stringify(newSelection)
+              );
+              return newSelection;
+            } else {
+              const newCommune = {
+                value: communeCode,
+                label: `${communeCode} - ${feature.properties.nom}`,
+              };
+              const newSelection = [...prevSelectedCommunes, newCommune];
+              localStorage.setItem(
+                "selectedCommunes",
+                JSON.stringify(newSelection)
+              );
+              centerMapOnCommune(communeCode);
+              return newSelection;
+            }
+          });
+        },
+      });
+    },
+    [centerMapOnCommune]
+  );
 
   return (
     <Container>

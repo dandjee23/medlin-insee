@@ -90,6 +90,7 @@ const SelectionActivite = () => {
     } else {
       setAlertMessage('');
       localStorage.setItem('selectedNAF', selectedSubclass.value || '');
+      localStorage.setItem('selectedNAF1', selectedSubclass.label || '');
       navigate('/localisation-implantation');
     }
   };
@@ -160,7 +161,7 @@ const SelectionActivite = () => {
           borderLeft: '5px solid blue' }}>
           <Box display="flex" alignItems="center">
             <Typography variant="caption" style={{ marginRight: '8px' }}>
-              <span style={{ color: '#286AC7' }}>Vous avez choisi l'activité</span> : {selectedSubclass.label}
+              <span style={{ color: '#286AC7', fontSize: '14px'}}>Vous avez choisi l'activité</span> : {selectedSubclass.label}
             </Typography>
             <IconButton onClick={handleDeleteActivity} size="small" style={{ color: 'grey' }}>
               <CloseIcon fontSize="small" style={{ fontSize: '16px',  }} />

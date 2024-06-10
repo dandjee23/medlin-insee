@@ -7,6 +7,7 @@ import * as XLSX from 'xlsx';
 
 const SyntheseRecherche = () => {
   const [selectedNAF, setSelectedNAF] = useState('');
+  const [selectedNAF1, setSelectedNAF1] = useState('');
   const [selectedCommunes, setSelectedCommunes] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const populationRef = useRef();
@@ -22,6 +23,15 @@ const SyntheseRecherche = () => {
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
+
+  useEffect(() => {
+    const naf1 = localStorage.getItem('selectedNAF1');
+    setSelectedNAF1(naf1 || '');
+    
+  }, []);
+
+  
+
 
   const handleDownload = () => {
     const populationData = populationRef.current ? populationRef.current.getPopulationData() : [];
@@ -46,11 +56,11 @@ const SyntheseRecherche = () => {
         - Veuillez trouver ci-dessous les résultats issus de votre étude.
       </Typography>
       <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px' }}>
-        <Typography variant="h6" gutterBottom>Activité choisie :</Typography>
-        <Typography variant="body1">{selectedNAF || 'Aucune activité choisie'}</Typography>
+        <Typography variant="h6" gutterBottom>Votre code APE de l'activité choisie :</Typography>
+        <Typography variant="body1">{selectedNAF1 || 'Aucune activité choisie'}</Typography>
       </Paper>
       <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px' }}>
-        <Typography variant="h6" gutterBottom>Communes choisies :</Typography>
+        <Typography variant="h6" gutterBottom>Communes choisie(s) :</Typography>
         <Typography variant="body1">
           {selectedCommunes.length > 0 ? selectedCommunes.map(commune => commune.value).join(', ') : 'Aucune commune choisie'}
         </Typography>

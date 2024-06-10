@@ -3503,14 +3503,19 @@
   ],
   "87.20": [
     { "value": "87.20A", "label": "87.20A - Hébergement social pour handicapés mentaux et malades mentaux" },
-    { "value": "87.20B", "label": "87.20B - Hébergement social pour personnes âgées" },
-    { "value": "87.20C", "label": "87.20C - Hébergement social pour adultes et familles en difficultés et autre hébergement social" }
+    { "value": "87.20B", "label": "87.20C - Hébergement social pour toxicomanes" }
+  ],
+  "87.30": [
+    { "value": "87.30A", "label": "87.30A - Hébergement social pour personnes âgées ou handicapées physiques"}
+  ],
+  "87.90": [
+    { "value": "87.90A", "label": "87.90A - Hébergement social pour enfants en difficultés"},
+    { "value": "87.90B", "label": "87.90B - hébergement social pour adultes et en familles en difficultés et autre hébergement social"}
   ],
   "88.10": [
     { "value": "88.10A", "label": "88.10A - Aide à domicile" },
-    { "value": "88.10B", "label": "88.10B - Accueil de jeunes enfants" },
-    { "value": "88.10C", "label": "88.10C - Aide par le travail" },
-    { "value": "88.10D", "label": "88.10D - Accompagnement des enfants handicapés" }
+    { "value": "88.10B", "label": "88.10B - Accueil  ou accompagnement sans hébergements d'adultes handicapés ou de personnes âgées" },
+    { "value": "88.10C", "label": "88.10C - Aide par le travail" }
   ],
   "88.91": [
     { "value": "88.91A", "label": "88.91A - Hébergement social pour enfants en difficultés" },

@@ -21,7 +21,7 @@ const Aide = memo(() => {
       </Typography>
       <Box sx={{ mt: 4, mb: 2 }}>
         {faqs.map((faq, index) => (
-          <Accordion key={index} sx={{ mb: 2 }}>
+          <Accordion key={index} sx={{ mb: 2 }} defaultExpanded>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}> {/* Add the icon here */}
               <Typography variant="h6" component="h2" >
                 {faq.question}
