@@ -176,7 +176,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
         </MapContainer>
       </Box>
       <TableContainer component={Paper} style={{marginTop: '20px'}}>
-        <Table aria-label="simple table">
+        <Table >
           <TableHead style={{ backgroundColor: 'grey'}}>
             <TableRow>
               <TableCell style={{ color: 'white'}}>Siren</TableCell>
