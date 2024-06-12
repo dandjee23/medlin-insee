@@ -116,10 +116,10 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
     const coords = convertLambertToLatLng(x, y);
 
     return {
-      siren: etablissement.siren,
+      siren: etablissement.siret,
       denominationUniteLegale: uniteLegale.denominationUniteLegale || 'Indisponible',
       adresse: `${adresseEtablissement.numeroVoieEtablissement || ''} ${adresseEtablissement.typeVoieEtablissement || ''} ${adresseEtablissement.libelleVoieEtablissement || ''} `,
-      commune: `${adresseEtablissement.codeCommuneEtablissement} ${adresseEtablissement.libelleCommuneEtablissement}`,
+      commune: `${adresseEtablissement.codeCommuneEtablissement}, ${adresseEtablissement.libelleCommuneEtablissement}`,
       trancheEffectifs: trancheEffectifs[uniteLegale.trancheEffectifsUniteLegale] || 'Non renseigné',
       categorieEntreprise: uniteLegale.categorieEntreprise || 'Non défini',
       coords: coords
@@ -133,7 +133,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
         <MapContainer 
           center={[46.603354, 1.888334]} 
           zoom={6} 
-          style={{ height: '100%', width: '95%' }}
+          style={{ height: '100%', width: '100%' }}
           whenCreated={map => { mapRef.current = map; }}
         >
           <TileLayer
@@ -163,8 +163,9 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
               return (
                 <Marker key={index} position={transformedData.coords} icon={redIcon}>
                   <Popup>
-                    <strong style={{ color: 'blue' }}>Siren: </strong> {transformedData.siren}<br />
+                    <strong style={{ color: 'blue' }}>Siret: </strong> {transformedData.siren}<br />
                     <strong style={{ color: 'blue' }}>Nom Etablissement: </strong> {transformedData.denominationUniteLegale ? transformedData.denominationUniteLegale : 'Non disponible'}<br />
+                    
                     <strong style={{ color: 'blue' }}>Adresse: </strong> {transformedData.adresse}<br />
                     <strong style={{ color: 'blue' }}>Commune: </strong> {transformedData.commune}<br />
                     <strong style={{ color: 'blue' }}>Effectif: </strong> {transformedData.trancheEffectifs}<br />
@@ -179,7 +180,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
         <Table >
           <TableHead style={{ backgroundColor: 'grey'}}>
             <TableRow>
-              <TableCell style={{ color: 'white'}}>Siren</TableCell>
+              <TableCell style={{ color: 'white'}}>Siret</TableCell>
               <TableCell style={{ color: 'white'}}>Nom</TableCell>
               <TableCell style={{ color: 'white'}}>Adresse</TableCell>
               <TableCell style={{ color: 'white'}}>Commune</TableCell>
@@ -191,7 +192,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
             {etablissements.map((etablissement, index) => {
               const transformedData = transformData(etablissement);
               return (
-                <TableRow key={index} style={{backgroundColor: index % 2 === 0 ? 'lightgrey' : 'white'}}>
+                <TableRow key={index} style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : 'white'}}>
                   <TableCell>{transformedData.siren}</TableCell>
                   <TableCell>{transformedData.denominationUniteLegale}</TableCell>
                   <TableCell>{transformedData.adresse}</TableCell>
@@ -209,3 +210,5 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
 });
 
 export default EntreprisesTab;
+
+//transformData.denominationUsuelleEtablissement

@@ -62,12 +62,11 @@ const SyntheseRecherche = () => {
   };
 
   const handleBack = () => {
-    navigate('/localisation-implantation'); // Adjust this path as needed
+    navigate('/localisation-implantation'); 
   };
 
   const handleNext = () => {
-    // Implement navigation to the next page if needed
-    navigate('/Aide'); // Adjust this path as needed
+    navigate('/Aide'); 
   };
 
   return (
@@ -94,16 +93,16 @@ const SyntheseRecherche = () => {
           </Button>
         </Box>
       </Box>
-      <Typography variant="body1" paragraph style={{ marginTop: '20px' }}>
+      <Typography variant="h6" paragraph style={{ marginTop: '20px' }}>
         Veuillez trouver ci-dessous les résultats issus de votre étude.
       </Typography>
-      <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px' }}>
+      <Paper elevation={1} style={{ padding: '16px', marginBottom: '16px', borderLeft: '3px solid #286AC7' }}>
         <Typography variant="h6" gutterBottom>Activité choisie :</Typography>
-        <Typography variant="body1">{selectedNAF1 || 'Aucune activité choisie'}</Typography>
+        <Typography variant="body1" style={{color: 'rgb(96, 96, 96)'}}>{selectedNAF1 || 'Aucune activité choisie'}</Typography>
       </Paper>
-      <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px' }}>
-        <Typography variant="h6" gutterBottom>Communes choisies :</Typography>
-        <Typography variant="body1">
+      <Paper elevation={1} style={{ padding: '16px', marginBottom: '16px', borderLeft: '3px solid #286AC7' }}>
+        <Typography variant="h6" gutterBottom>Communes choisie(s) :</Typography>
+        <Typography variant="body1" style={{color: 'rgb(96, 96, 96)'}}>
           {selectedCommunes.length > 0 ? selectedCommunes.map(commune => commune.value).join(', ') : 'Aucune commune choisie'}
         </Typography>
       </Paper>
