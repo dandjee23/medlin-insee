@@ -135,9 +135,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
   const malePopulation = sexes.includes('1') ? getPopulationValue('1', 'ENS') : 0;
   const femalePopulation = sexes.includes('2') ? getPopulationValue('2', 'ENS') : 0;
 
-  const totalAgeDistribution = ageGroups.map(code => 
-    sexes.reduce((acc, sexe) => acc + getPopulationValue(sexe, code), 0)
-  );
+  
   const maleAgeDistribution = ageGroups.map(code => getPopulationValue('1', code));
   const femaleAgeDistribution = ageGroups.map(code => getPopulationValue('2', code));
 
@@ -156,7 +154,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
                   insidetextorientation: 'radial'
                 }
               ]}
-              layout={{ title: 'Répartition Hommes/Femmes', autosize: true }}
+              layout={{ title: 'Répartition Hommes/Femmes', autosize: true, color: 'blue' }}
               style={{ width: '100%', height: '100%' }}
               ref={el => chartsRef.current[0] = el}
             />
@@ -168,7 +166,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
               <TableHead style={{ backgroundColor: 'grey'}}>
                 <TableRow>
                   <TableCell style={{ color: 'white'}}>Sexe</TableCell>
-                  <TableCell style={{ color: 'white'}}>Population</TableCell>
+                  <TableCell style={{ color: 'white'}}>Nombre de Personnes</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -183,44 +181,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
           </TableContainer>
         </Grid>
       </Grid>
-      <Grid container spacing={2} mt={4}>
-        <Grid item xs={12} md={6}>
-          <Box style={{ height: 400 }}>
-            <Plot
-              data={[
-                {
-                  type: 'bar',
-                  x: ageGroups.map(code => ageGroupLabels[code]),
-                  y: totalAgeDistribution,
-                }
-              ]}
-              layout={{ title: 'Âge de la Population', autosize: true }}
-              style={{ width: '100%', height: '100%' }}
-              ref={el => chartsRef.current[1] = el}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TableContainer component={Paper}>
-            <Table ref={tableRef}>
-              <TableHead style={{ backgroundColor: 'grey'}}>
-                <TableRow>
-                  <TableCell style={{ color: 'white'}}>Tranche d'âge</TableCell>
-                  <TableCell style={{ color: 'white'}}>Population</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {ageGroups.map(code => (
-                  <TableRow key={code} style={{backgroundColor: code % 2 === 0 ? '#f5f5f5' : 'white'}}>
-                    <TableCell>{ageGroupLabels[code]}</TableCell>
-                    <TableCell>{formatNumber(totalAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-      </Grid>
+      
       <Grid container spacing={2} mt={4}>
         <Grid item xs={12} md={6}>
           <Box style={{ height: 400 }}>

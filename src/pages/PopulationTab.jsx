@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Tabs, Tab, Box, Typography, IconButton } from '@mui/material';
+import { Tabs, Tab, Box, Typography, IconButton, Tooltip } from '@mui/material';
 import { styled } from '@mui/system';
 import DownloadIcon from '@mui/icons-material/Download';
 import Population from './Population';
@@ -61,6 +61,7 @@ const PopulationTab = () => {
         <Typography variant="h5" gutterBottom style={{ marginBottom: '40px', marginLeft: '40px' }}>
           Données Statistiques Population
         </Typography>
+        <Tooltip >
         <IconButton 
           onClick={handleDownload}
           style={{
@@ -85,11 +86,13 @@ const PopulationTab = () => {
           <DownloadIcon style={{fontSize: '20px'}}/>
           <span style={{ fontSize: '17px', marginLeft: '9px' }}>Télécharger</span>
         </IconButton>
+        </Tooltip>
+        
       </HeaderContainer>
       <StyledTabs value={selectedTab} onChange={handleChange}>
         <StyledTab label="Population" />
         <StyledTab label="Ménage" />
-        <StyledTab label="Activiter" />
+        <StyledTab label="Activité" />
         <StyledTab label="Logement" />
         <StyledTab label="Emploi" />
       </StyledTabs>
