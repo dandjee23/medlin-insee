@@ -150,8 +150,8 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
 
   return (
     <Box>
-      <Typography variant="h6" mt={6} style={{ textAlign: 'center' }}>Ménages selon la catégorie socioprofessionnelle de la personne de référence</Typography>
-      <Grid container spacing={2} mt={3}>
+      <Typography variant="h6" mt={6} mb={6}  style={{ textAlign: 'center' }}>Ménages selon la catégorie socioprofessionnelle de la personne de référence </Typography>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box style={{ height: 600 }}>
             <Plot
@@ -180,7 +180,7 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
                 margin: { l: 70, r: 50, b: 50, t: 50, pad: 10 },
                 legend: {
                   orientation: 'h',
-                  y: -0.7,
+                  y: -0.6,
                   x: 0.2
                 }
               }}
@@ -194,17 +194,17 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
             <Table ref={tableRef}>
               <TableHead style={{ backgroundColor: 'grey' }}>
                 <TableRow>
-                  <TableCell style={{ color: 'white' }}>Catégorie Socioprofessionnelle</TableCell>
-                  <TableCell style={{ color: 'white' }}>Population</TableCell>
+                  <TableCell style={{ color: 'white',  }}>Catégorie Socioprofessionnelle</TableCell>
+                  <TableCell style={{ color: 'white' }}>Population des ménages</TableCell>
                   <TableCell style={{ color: 'white' }}>Nombre de Logements</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {tableData.map((row, index) => (
                   <TableRow key={index} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell>{row.category}</TableCell>
-                    <TableCell>{formatNumber(row.Population)}</TableCell>
-                    <TableCell>{formatNumber(row.NombreDeLogements)}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{row.category}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.Population)}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.NombreDeLogements)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

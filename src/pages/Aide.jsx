@@ -12,23 +12,21 @@ const Aide = memo(() => {
 
   return (
     <Container sx={{ mt: 2 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Besoin d'Aide ?
+      <Typography variant="h3" component="h1" gutterBottom style={{textAlign: 'center', fontWeight: 'bold'}}>
+          Questions fréquentes
       </Typography>
       <br />
-      <Typography variant="h6" component="h1" gutterBottom>
-          - Questions les plus fréquentes :
-      </Typography>
+      
       <Box sx={{ mt: 4, mb: 2 }}>
         {faqs.map((faq, index) => (
           <Accordion key={index} sx={{ mb: 2 }} defaultExpanded>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}> {/* Add the icon here */}
-              <Typography variant="h6" component="h2" >
+            <AccordionSummary expandIcon={<ExpandMoreIcon color='primary' sx={{ fontSize: '1.5rem' }}/>}> {/* Add the icon here */}
+              <Typography variant="h6" component="h2" color="primary" style={{ fontWeight: 'bold'}}>
                 {faq.question}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant="body1" component="p">
+              <Typography variant="body1" component="p" style={{color: 'rgb(96, 96, 96)'}}>
                 {faq.answer}
               </Typography>
             </AccordionDetails>

@@ -293,7 +293,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
                 <Marker key={index} position={transformedData.coords}>
                   <Popup>
                     <strong style={{ color: 'blue' }}>Siret: </strong> {transformedData.siret}<br />
-                    <strong style={{ color: 'blue' }}>Nom Etablissement: </strong> {transformedData.denomination}<br />
+                    <strong style={{ color: 'blue' }}>Dénomination: </strong> {transformedData.denomination}<br />
                     <strong style={{ color: 'blue' }}>Adresse: </strong> {transformedData.adresse}<br />
                     <strong style={{ color: 'blue' }}>Commune: </strong> {transformedData.commune}<br />
                     <strong style={{ color: 'blue' }}>Effectif: </strong> {transformedData.tranchEffectifEtablissement}<br />
@@ -309,7 +309,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
           <TableHead style={{ backgroundColor: 'grey' }}>
             <TableRow>
               <TableCell style={{ color: 'white' }}>Siret</TableCell>
-              <TableCell style={{ color: 'white' }}>Nom</TableCell>
+              <TableCell style={{ color: 'white' }}>Dénomination</TableCell>
               <TableCell style={{ color: 'white' }}>Adresse</TableCell>
               <TableCell style={{ color: 'white' }}>Commune</TableCell>
               <TableCell style={{ color: 'white' }}>Tranche Effectifs</TableCell>

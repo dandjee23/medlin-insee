@@ -165,15 +165,15 @@ const Population = forwardRef(({ communeCodes }, ref) => {
             <Table ref={tableRef}>
               <TableHead style={{ backgroundColor: 'grey'}}>
                 <TableRow>
-                  <TableCell style={{ color: 'white'}}>Sexe</TableCell>
-                  <TableCell style={{ color: 'white'}}>Nombre de Personnes</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center'}}>Sexe</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center'}}>Nombre de Personnes</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {['1', '2'].map((sexe, index) => (
                   <TableRow key={sexe} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell>{sexeLabels[sexe]}</TableCell>
-                    <TableCell>{formatNumber(getPopulationValue(sexe, 'ENS'))}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{sexeLabels[sexe]}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(getPopulationValue(sexe, 'ENS'))}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -202,7 +202,9 @@ const Population = forwardRef(({ communeCodes }, ref) => {
                   marker: { color: '' }
                 }
               ]}
-              layout={{ title: 'Distribution par Âge et Sexe', autosize: true, barmode: 'stack' }}
+              layout={{ title: 'Distribution par Âge et Sexe', yaxis: {
+
+                title: 'Nombre de personnes' }, autosize: true, barmode: 'stack' }}
               style={{ width: '100%', height: '100%' }}
               ref={el => chartsRef.current[2] = el}
             />
