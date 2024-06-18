@@ -1,7 +1,7 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
 import axios from 'axios';
 import Plot from 'react-plotly.js';
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid, Typography, CircularProgress } from '@mui/material';
+import { Box, Table, Skeleton, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid, Typography,} from '@mui/material';
 
 const formatNumber = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -101,12 +101,38 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
   }));
 
   if (loading) {
-    return <CircularProgress />;
+    return (
+      <Box>
+        
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <Box style={{ height: 400 }}>
+            <Skeleton variant="rectangular" width="100%" height="100%" />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Skeleton variant="rectangular" width="100%" height={40} />
+          <Skeleton variant="rectangular" width="100%" height={40} />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} mt={4}>
+        <Grid item xs={12} md={6}>
+          <Box style={{ height: 400 }}>
+            <Skeleton variant="rectangular" width="100%" height="100%" />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Skeleton variant="rectangular" width="100%" height={40} />
+          <Skeleton variant="rectangular" width="100%" height={40} />
+          <Skeleton variant="rectangular" width="100%" height={40} />
+        </Grid>
+      </Grid>
+    </Box>
+    );
   }
 
   const transformDataForTable = (data) => {
     if (!data || !data.Cellule || !data.Variable) return [];
-
     const csVariable = data.Variable;
 
     const categoryLabels = {};
@@ -147,6 +173,16 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
 
   console.log('Chart data:', chartData); // Debugging chart data
   //alert('Chart data: ' + JSON.stringify(chartData)); // Debugging chart data
+
+  if (chartData.length === 0 && tableData.length === 0) {
+    return (
+      <Box style={{ textAlign: 'center', marginTop: '20px' }}>
+      <img src='/no-results.png' alt="No results" style={{ width: '200px', height: '200px',marginTop: '20px', marginBottom:'120px' }} />
+      <Typography variant='h5'>Oupss... résultats non trouvés</Typography>
+      <Typography variant='h6'>Veuillez sélectionner une autre commune</Typography>
+    </Box>
+    );
+  }
 
   return (
     <Box>

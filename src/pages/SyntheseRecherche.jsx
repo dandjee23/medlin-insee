@@ -1,18 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Container, Paper, Typography, Box, Tabs, Tab, IconButton, Tooltip, Divider, Button } from '@mui/material';
+import { Container, Paper, Typography, Box, Tabs, Tab, Divider, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import PopulationTab from './PopulationTab';
 import EntreprisesTab from './EntreprisesTab';
-import GetAppIcon from '@mui/icons-material/GetApp';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import * as XLSX from 'xlsx';
-import html2canvas from 'html2canvas';
 
 const SyntheseRecherche = () => {
   const [selectedNAF, setSelectedNAF] = useState('');
   const [selectedNAF1, setSelectedNAF1] = useState('');
   const [selectedCommunes, setSelectedCommunes] = useState([]);
+  const [selectedCommuneNames, setSelectedCommuneNames] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const populationRef = useRef();
   const entreprisesRef = useRef();
@@ -21,8 +19,10 @@ const SyntheseRecherche = () => {
   useEffect(() => {
     const naf = localStorage.getItem('selectedNAF');
     const communes = JSON.parse(localStorage.getItem('selectedCommunes')) || [];
+    const communeNames = JSON.parse(localStorage.getItem('selectedCommuneNames')) || [];
     setSelectedNAF(naf || '');
     setSelectedCommunes(communes || []);
+    setSelectedCommuneNames(communeNames || []);
   }, []);
 
   useEffect(() => {
@@ -34,32 +34,6 @@ const SyntheseRecherche = () => {
     setTabIndex(newValue);
   };
 
-  const handleDownload = async () => {
-    const populationData = populationRef.current ? populationRef.current.getPopulationData() : [];
-    const entreprisesData = entreprisesRef.current ? entreprisesRef.current.getEntreprisesData() : [];
-
-    console.log("Population Data for export:", populationData);
-    console.log("Entreprises Data for export:", entreprisesData);
-
-    const workbook = XLSX.utils.book_new();
-    const populationSheet = XLSX.utils.json_to_sheet(populationData);
-    XLSX.utils.book_append_sheet(workbook, populationSheet, "Population");
-    const entreprisesSheet = XLSX.utils.json_to_sheet(entreprisesData);
-    XLSX.utils.book_append_sheet(workbook, entreprisesSheet, "Entreprises");
-
-    XLSX.writeFile(workbook, "Medl'In.xlsx");
-
-    if (tabIndex === 0 && populationRef.current) {
-      const populationElement = populationRef.current.getTableElement();
-      if (populationElement) {
-        const canvas = await html2canvas(populationElement);
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'PopulationTab.png';
-        link.click();
-      }
-    }
-  };
 
   const handleBack = () => {
     navigate('/localisation-implantation'); 
@@ -103,7 +77,7 @@ const SyntheseRecherche = () => {
       <Paper elevation={1} style={{ padding: '16px', marginBottom: '16px', borderLeft: '3px solid #286AC7' }}>
         <Typography variant="h6" gutterBottom>Communes choisie(s) :</Typography>
         <Typography variant="body1" style={{color: 'rgb(96, 96, 96)'}}>
-          {selectedCommunes.length > 0 ? selectedCommunes.map(commune => commune.value).join(', ') : 'Aucune commune choisie'}
+          {selectedCommuneNames.length > 0 ? selectedCommuneNames.join(', ') : 'Aucune commune choisie'}
         </Typography>
       </Paper>
 
@@ -138,19 +112,7 @@ const SyntheseRecherche = () => {
             }} 
           />
         </Tabs>
-        <Tooltip title="Exporter les données">
-          <IconButton
-            style={{ 
-              position: 'absolute', 
-              top: 0, 
-              right: 0, 
-              border: '1px solid lightgrey',
-            }}
-            onClick={handleDownload}
-          >
-            <GetAppIcon />
-          </IconButton>
-        </Tooltip>
+        
         <Divider style={{ marginTop: '16px' }} />
       </Box>
       {tabIndex === 0 && (
