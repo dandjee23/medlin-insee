@@ -178,7 +178,7 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
     return (
       <Box style={{ textAlign: 'center', marginTop: '20px' }}>
       <img src='/no-results.png' alt="No results" style={{ width: '200px', height: '200px',marginTop: '20px', marginBottom:'120px' }} />
-      <Typography variant='h5'>Oupss... résultats non trouvés</Typography>
+      <Typography variant='h5'>Oupss... résultat non trouvé pour cette commune</Typography>
       <Typography variant='h6'>Veuillez sélectionner une autre commune</Typography>
     </Box>
     );

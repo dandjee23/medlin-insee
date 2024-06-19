@@ -133,7 +133,7 @@ const SelectionActivite = () => {
     <Container>
       <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom={2}>
         <Typography variant="h4" gutterBottom>
-          Sélection de l'Activité
+          Sélection de l'activité
         </Typography>
         <Box display="flex" alignItems="center">
           <Button

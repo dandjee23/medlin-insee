@@ -57,9 +57,8 @@ const Home = () => {
             avec les données de l'Insee
           </Typography>
           <Typography variant="h6" component="p" sx={{ mt: 2, mb: 4 }}>
-            Une solution complète pour vous aider à réaliser des études de marché approfondies.
-            Conçue pour les futurs créateurs d'entreprises, notre application utilise les données de l'Insee
-            <span style={{ color: 'blue' }}> pour vous fournir des analyses fiables et détaillées.</span>
+          Une application mise à disposition par l'Insee, spécialement conçue pour les futurs entrepreneurs et les néo-entrepreneurs. Cette solution vous offre la possibilité de réaliser des études de marché approfondies,
+            <span style={{ color: 'blue' }}> en vous fournissant des analyses détaillées et de qualité supérieure pour soutenir vos projets entrepreneuriaux.</span>
           </Typography>
           <StyledButton onClick={handleStartStudy} variant="contained" size="large">
             Commencer l'étude

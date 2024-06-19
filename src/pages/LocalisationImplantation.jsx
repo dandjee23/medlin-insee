@@ -258,7 +258,7 @@ const LocalisationImplantation = () => {
         </Box>
       </Box>
       <MuiAlert severity="info" variant="outlined" style={{ marginBottom: '20px' }}>
-        Veuillez choisir votre zone d'implantation en sélectionnant dans la liste de département ou directement sur la carte.
+        Veuillez sélectionnez votre zone d'implantation à partir du menu déroulant ou en cliquant directement sur la carte.
       </MuiAlert>
       <Box display="flex">
         <MapContainer
@@ -307,7 +307,7 @@ const LocalisationImplantation = () => {
                 value={selectedDepartment}
                 onChange={handleDepartmentChange}
                 isSearchable
-                placeholder="Sélectionner un département"
+                placeholder="code ou nom"
               />
             )}
             {selectedDepartment && (
@@ -324,7 +324,7 @@ const LocalisationImplantation = () => {
                     onChange={handleCommuneChange}
                     isMulti
                     isSearchable
-                    placeholder="Sélectionner des communes"
+                    placeholder="code ou nom"
                   />
                 )}
               </>
