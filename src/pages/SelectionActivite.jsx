@@ -72,7 +72,7 @@ const SelectionActivite = () => {
 
   const handleSubclassChange = (selectedOption) => {
     setSelectedSubclass(selectedOption);
-    console.log('Sous-classe sélectionnée:', selectedOption); // Ajouter un log ici pour vérifier
+    //console.log('Sous-classe sélectionnée:', selectedOption); // Ajouter un log ici pour vérifier
   };
 
   const handleDeleteActivity = () => {

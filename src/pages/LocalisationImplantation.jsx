@@ -68,14 +68,14 @@ const LocalisationImplantation = () => {
 
   useEffect(() => {
     if (selectedDepartment) {
-      console.log('Selected Department:', selectedDepartment);
+      //console.log('Selected Department:', selectedDepartment);
       setCommunesGeoJsonData(null);
       setCommunes([]);
       setLoadingCommunes(true);
       axios.get(`https://geo.api.gouv.fr/departements/${selectedDepartment.value}/communes?format=geojson&geometry=contour`)
         .then(response => {
           const data = response.data;
-          console.log('Communes Data:', data);
+          //console.log('Communes Data:', data);
           if (data && data.features) {
             setCommunesGeoJsonData(data);
             const communesList = data.features.map(commune => ({

@@ -3247,6 +3247,9 @@
   "66.29": [
     { "value": "66.29Z", "label": "66.29Z - Autres activités auxiliaires d'assurance et de caisses de retraite" }
   ],
+  "66.30": [
+    { "value": "66.30A", "label": "66.30A - Services de gestion de fonds" }
+  ],
   "68.10": [
     { "value": "68.10Z", "label": "68.10Z - Activités des marchands de biens immobiliers" }
   ],
