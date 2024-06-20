@@ -95,9 +95,9 @@ const PopulationTab = () => {
       <StyledTabs value={selectedTab} onChange={handleChange}>
         <StyledTab label="Population" />
         <StyledTab label="Ménage" />
-        <StyledTab label="Activité" />
+        <StyledTab label="Activité/Emploi" />
         <StyledTab label="Logement" />
-        <StyledTab label="Emploi" />
+        <StyledTab label="Diplômes/Formation" />
       </StyledTabs>
       <Box style={{ paddingTop: '20px', paddingBottom: '20px', paddingRight: '20px', borderRight: '1px solid #f5f5f5', borderLeft: '1px solid #f5f5f5', borderBottom: '1px solid #f5f5f5' }}>
         {selectedTab === 0 && <Population communeCodes={selectedCommunes} ref={populationRef} />}

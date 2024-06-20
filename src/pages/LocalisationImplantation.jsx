@@ -205,7 +205,7 @@ const LocalisationImplantation = () => {
             : [...prevSelectedCommunes, { value: communeCode, label: `${communeCode} - ${communeName}` }];
           const communeNames = newSelection.map(option => {
             const [code, name] = option.label.split(' - ');
-            return `${name}(${code})`;
+            return `${name} (${code})`;
           });
           localStorage.setItem('selectedCommunes', JSON.stringify(newSelection));
           localStorage.setItem('selectedCommuneNames', JSON.stringify(communeNames));
