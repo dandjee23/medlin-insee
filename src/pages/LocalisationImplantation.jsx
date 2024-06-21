@@ -106,7 +106,7 @@ const LocalisationImplantation = () => {
     setSelectedCommunes(selectedOptions || []);
     const communeNames = selectedOptions ? selectedOptions.map(option => {
       const [code, name] = option.label.split(' - ');
-      return `${name}(${code})`;
+      return `${name} (${code})`;
     }) : [];
     localStorage.setItem('selectedCommunes', JSON.stringify(selectedOptions || []));
     localStorage.setItem('selectedCommuneNames', JSON.stringify(communeNames));

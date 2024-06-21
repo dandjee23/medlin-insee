@@ -100,18 +100,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
   if (!ageSexData || !csSexData) {
     return (
       <Box>
-        
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <Box style={{ height: 400 }}>
-              <Skeleton variant="rectangular" width="100%" height="100%" />
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Skeleton variant="rectangular" width="100%" height={40} />
-            <Skeleton variant="rectangular" width="100%" height={40} />
-          </Grid>
-        </Grid>
+        <Skeleton variant="text" width="100%" height={40} />
         <Grid container spacing={2} mt={4}>
           <Grid item xs={12} md={6}>
             <Box style={{ height: 400 }}>
@@ -119,9 +108,23 @@ const Population = forwardRef(({ communeCodes }, ref) => {
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Skeleton variant="rectangular" width="100%" height={40} />
-            <Skeleton variant="rectangular" width="100%" height={40} />
-            <Skeleton variant="rectangular" width="100%" height={40} />
+            <Box style={{ height: 400 }}>
+              <Skeleton variant="rectangular" width="100%" height="100%" />
+            </Box>
+          </Grid>
+        </Grid>
+        <Skeleton variant="text" width="100%" height={40} style={{marginTop: '40px', marginBottom: '60px'}}/>
+        <Grid container spacing={2} >
+        
+          <Grid item xs={12} md={6}>
+            <Box style={{ height: 400 }}>
+              <Skeleton variant="rectangular" width="100%" height="100%" />
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box style={{ height: 400 }}>
+              <Skeleton variant="rectangular" width="100%" height="100%" />
+            </Box>
           </Grid>
         </Grid>
       </Box>
@@ -230,7 +233,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
 
   return (
     <Box>
-      <Typography variant="h6" style={{ textAlign: 'center' }}>Répartition de la population selon l'âge</Typography>
+      <Typography variant="h6" style={{ textAlign: 'center' }}>Répartition de la population selon le sexe</Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box style={{ height: 400 }}>
@@ -263,15 +266,15 @@ const Population = forwardRef(({ communeCodes }, ref) => {
             <Table ref={tableRef}>
               <TableHead style={{ backgroundColor: 'grey' }}>
                 <TableRow>
-                  <TableCell style={{ color: 'white' }}>Sexe</TableCell>
-                  <TableCell style={{ color: 'white' }}>Population</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Sexe</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Population</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {['1', '2'].map((sexe, index) => (
                   <TableRow key={sexe} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell>{sexeLabels[sexe]}</TableCell>
-                    <TableCell>{formatNumber(getPopulationValue(sexe, 'ENS'))}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{sexeLabels[sexe]}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(getPopulationValue(sexe, 'ENS'))}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -341,19 +344,19 @@ const Population = forwardRef(({ communeCodes }, ref) => {
             <Table ref={tableRef}>
               <TableHead style={{ backgroundColor: 'grey' }}>
                 <TableRow>
-                  <TableCell style={{ color: 'white' }}>Tranche d'âge</TableCell>
-                  <TableCell style={{ color: 'white' }}>{sexeLabels['1']}</TableCell>
-                  <TableCell style={{ color: 'white' }}>{sexeLabels['2']}</TableCell>
-                  <TableCell style={{ color: 'white' }}>Total</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Tranche d'âge</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>{sexeLabels['1']}</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>{sexeLabels['2']}</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Total</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {ageGroups.map((code, index) => (
                   <TableRow key={code} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell>{ageGroupLabels[code]}</TableCell>
-                    <TableCell>{formatNumber(maleAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
-                    <TableCell>{formatNumber(femaleAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
-                    <TableCell >{formatNumber(totalAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{ageGroupLabels[code]}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(maleAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(femaleAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(totalAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -427,19 +430,19 @@ const Population = forwardRef(({ communeCodes }, ref) => {
             <Table ref={tableRef}>
               <TableHead style={{ backgroundColor: 'grey' }}>
                 <TableRow>
-                  <TableCell style={{ color: 'white' }}>Catégorie</TableCell>
-                  <TableCell style={{ color: 'white' }}>Hommes</TableCell>
-                  <TableCell style={{ color: 'white' }}>Femmes</TableCell>
-                  <TableCell style={{ color: 'white' }}>Ensemble</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Catégorie</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Hommes</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Femmes</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Ensemble</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {tableData.map((row, index) => (
                   <TableRow key={row.category} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell>{row.category}</TableCell>
-                    <TableCell>{formatNumber(row.Homme)}</TableCell>
-                    <TableCell>{formatNumber(row.Femme)}</TableCell>
-                    <TableCell>{formatNumber(row.Ensemble)}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{row.category}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.Homme)}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.Femme)}</TableCell>
+                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.Ensemble)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -447,6 +450,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
           </TableContainer>
         </Grid>
       </Grid>
+      <Typography variant="caption" style={{display: 'flex', justifyContent: 'flex-end', marginTop: '40px'}}> Source : Insee, RP2020 exploitation principale, géographie au 01/01/2023.</Typography>
     </Box>
   );
 });

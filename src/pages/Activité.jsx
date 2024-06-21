@@ -100,31 +100,33 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
   if (loading) {
     return (
       <Box>
-        
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          <Box style={{ height: 400 }}>
-            <Skeleton variant="rectangular" width="100%" height="100%" />
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Skeleton variant="rectangular" width="100%" height={40} />
-          <Skeleton variant="rectangular" width="100%" height={40} />
-        </Grid>
-      </Grid>
-      <Grid container spacing={2} mt={4}>
-        <Grid item xs={12} md={6}>
-          <Box style={{ height: 400 }}>
-            <Skeleton variant="rectangular" width="100%" height="100%" />
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Skeleton variant="rectangular" width="100%" height={40} />
-          <Skeleton variant="rectangular" width="100%" height={40} />
-          <Skeleton variant="rectangular" width="100%" height={40} />
-        </Grid>
-      </Grid>
-    </Box>
+  <Skeleton variant="text" width="100%" height={40} />
+  <Grid container spacing={2} mt={4}>
+    <Grid item xs={12} md={6}>
+      <Box style={{ height: 400 }}>
+        <Skeleton variant="rectangular" width="100%" height="100%" />
+      </Box>
+    </Grid>
+    <Grid item xs={12} md={6}>
+      <Box style={{ height: 400 }}>
+        <Skeleton variant="rectangular" width="100%" height="100%" />
+      </Box>
+    </Grid>
+  </Grid>
+  <Grid container spacing={2} mt={4}>
+    <Grid item xs={12} md={6}>
+      <Box style={{ height: 400 }}>
+        <Skeleton variant="rectangular" width="100%" height="100%" />
+      </Box>
+    </Grid>
+    <Grid item xs={12} md={6}>
+      <Box style={{ height: 400 }}>
+        <Skeleton variant="rectangular" width="100%" height="100%" />
+      </Box>
+    </Grid>
+  </Grid>
+</Box>
+
     );
   }
 
@@ -233,6 +235,17 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
               ]}
               layout={{
                 title: '',
+                yaxis: {
+                  title: 'Nombre de personnes',
+                  titlefont: {
+                    size: 13,
+                    
+                  },
+                  tickfont: {
+                    
+                    color: ''
+                  }
+                },
                 autosize: true,
                 barmode: 'group',
                 margin: { l: 70, r: 50, b: 50, t: 50, pad: 10 },
@@ -272,6 +285,7 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
           </TableContainer>
         </Grid>
       </Grid>
+      <Typography variant="caption" style={{display: 'flex', justifyContent: 'flex-end', marginTop: '40px'}}> Source : Insee, RP2020 exploitation principale, géographie au 01/01/2023.</Typography>
     </Box>
   );
 });

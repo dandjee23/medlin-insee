@@ -7,7 +7,7 @@ const Emploi = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      minHeight="400px"
+      minHeight="100vh"
     >
       <Typography variant="h4" component="h1">
       Travaux en progrès...

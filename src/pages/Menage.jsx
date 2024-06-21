@@ -1,61 +1,53 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
 import axios from 'axios';
 import Plot from 'react-plotly.js';
-import { Box, Table, Skeleton, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid, Typography,} from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid, Typography, Skeleton } from '@mui/material';
 
 const formatNumber = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 };
 
 const fetchData = async (communeCodes, urlTemplate) => {
-  const responses = await Promise.all(communeCodes.map(async (communeCode) => {
-    let response;
-    let retryCount = 0;
-    const maxRetries = 5;
-    const retryDelay = 1000; // 1 second
-
-    while (retryCount < maxRetries) {
-      try {
-        response = await axios.get(urlTemplate.replace('{communeCode}', communeCode), {
-          headers: {
-            Authorization: 'Bearer c1962a62-85fd-3e69-94a8-9a23ea7306a6'
-          }
-        });
-        break; // Break out of the loop if request is successful
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          retryCount++;
-          await new Promise(resolve => setTimeout(resolve, retryDelay));
-        } else {
-          throw error;
-        }
-      }
-    }
-
-    if (response) {
-      return response.data;
-    } else {
-      throw new Error(`Failed to fetch data for commune code: ${communeCode}`);
-    }
-  }));
-
-  return responses.reduce((acc, curr) => {
-    if (!acc.Variable && curr.Variable) {
-      acc.Variable = curr.Variable;
-    }
-    if (curr.Cellule && Array.isArray(curr.Cellule)) {
-      curr.Cellule.forEach(cell => {
-        const found = acc.Cellule.find(c =>
-          c.Modalite['@code'] === cell.Modalite['@code'] &&
-          c.Modalite['@variable'] === cell.Modalite['@variable'] &&
-          c.Mesure['@code'] === cell.Mesure['@code']
-        );
-        if (found) {
-          found.Valeur = (parseFloat(found.Valeur) + parseFloat(cell.Valeur)).toString();
-        } else {
-          acc.Cellule.push({ ...cell });
+  const fetchWithRetry = async (communeCode, retries = 5, delay = 1000) => {
+    try {
+      const response = await axios.get(urlTemplate.replace('{communeCode}', communeCode), {
+        headers: {
+          Authorization: 'Bearer c1962a62-85fd-3e69-94a8-9a23ea7306a6'
         }
       });
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.status === 429 && retries > 0) {
+        console.warn(`Rate limited, retrying commune code: ${communeCode}, retries left: ${retries}`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return fetchWithRetry(communeCode, retries - 1, delay * 2); // Exponential backoff
+      } else {
+        console.error(`Failed to fetch data for commune code: ${communeCode}`, error);
+        return null;
+      }
+    }
+  };
+
+  const responses = await Promise.all(communeCodes.map(communeCode => fetchWithRetry(communeCode)));
+  return responses.reduce((acc, curr) => {
+    if (curr) {
+      if (!acc.Variable && curr.Variable) {
+        acc.Variable = curr.Variable;
+      }
+      if (curr.Cellule && Array.isArray(curr.Cellule)) {
+        curr.Cellule.forEach(cell => {
+          const found = acc.Cellule.find(c =>
+            c.Modalite['@code'] === cell.Modalite['@code'] &&
+            c.Modalite['@variable'] === cell.Modalite['@variable'] &&
+            c.Mesure['@code'] === cell.Mesure['@code']
+          );
+          if (found) {
+            found.Valeur = (parseFloat(found.Valeur) + parseFloat(cell.Valeur)).toString();
+          } else {
+            acc.Cellule.push({ ...cell });
+          }
+        });
+      }
     }
     return acc;
   }, { Cellule: [] });
@@ -73,12 +65,10 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
         const menageUrl = 'https://api.insee.fr/donnees-locales/V0.1/donnees/geo-CS1_8@GEO2023RP2020/COM-{communeCode}.all';
         const mergedData = await fetchData(communeCodes, menageUrl);
         console.log('Fetched data:', mergedData); // Debugging fetched data
-        //alert('Fetched data: ' + JSON.stringify(mergedData)); // Debugging fetched data
         setData(mergedData);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
-        //alert('Error fetching data: ' + error); // Debugging error
         setLoading(false);
       }
     };
@@ -103,36 +93,38 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
   if (loading) {
     return (
       <Box>
-        
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          <Box style={{ height: 400 }}>
-            <Skeleton variant="rectangular" width="100%" height="100%" />
-          </Box>
+        <Skeleton variant="text" width="100%" height={40} />
+        <Grid container spacing={2} mt={4}>
+          <Grid item xs={12} md={6}>
+            <Box style={{ height: 400 }}>
+              <Skeleton variant="rectangular" width="100%" height="100%" />
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box style={{ height: 400 }}>
+              <Skeleton variant="rectangular" width="100%" height="100%" />
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Skeleton variant="rectangular" width="100%" height={40} />
-          <Skeleton variant="rectangular" width="100%" height={40} />
+        <Grid container spacing={2} mt={4}>
+          <Grid item xs={12} md={6}>
+            <Box style={{ height: 400 }}>
+              <Skeleton variant="rectangular" width="100%" height="100%" />
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box style={{ height: 400 }}>
+              <Skeleton variant="rectangular" width="100%" height="100%" />
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container spacing={2} mt={4}>
-        <Grid item xs={12} md={6}>
-          <Box style={{ height: 400 }}>
-            <Skeleton variant="rectangular" width="100%" height="100%" />
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Skeleton variant="rectangular" width="100%" height={40} />
-          <Skeleton variant="rectangular" width="100%" height={40} />
-          <Skeleton variant="rectangular" width="100%" height={40} />
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
     );
   }
 
   const transformDataForTable = (data) => {
     if (!data || !data.Cellule || !data.Variable) return [];
+
     const csVariable = data.Variable;
 
     const categoryLabels = {};
@@ -159,7 +151,6 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
     });
 
     console.log('Transformed data for table:', categoryData); // Debugging transformed data
-    //alert('Transformed data for table: ' + JSON.stringify(categoryData)); // Debugging transformed data
 
     return Object.entries(categoryData).map(([csCode, values]) => ({
       category: categoryLabels[csCode],
@@ -169,24 +160,30 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
   };
 
   const tableData = transformDataForTable(data);
+
+  // Move the last row to the second index
+  if (tableData.length > 1) {
+    const lastRow = tableData.pop();
+    tableData.splice(0, 0, lastRow);
+  }
+
   const chartData = tableData.filter(row => row.category !== 'Ensemble');
 
   console.log('Chart data:', chartData); // Debugging chart data
-  //alert('Chart data: ' + JSON.stringify(chartData)); // Debugging chart data
 
   if (chartData.length === 0 && tableData.length === 0) {
     return (
       <Box style={{ textAlign: 'center', marginTop: '20px' }}>
-      <img src='/no-results.png' alt="No results" style={{ width: '200px', height: '200px',marginTop: '20px', marginBottom:'120px' }} />
-      <Typography variant='h5'>Oupss... résultat non trouvé pour cette commune</Typography>
-      <Typography variant='h6'>Veuillez sélectionner une autre commune</Typography>
-    </Box>
+        <img src='/no-results.png' alt="No results" style={{ width: '200px', height: '200px', marginTop: '100px', marginBottom: '10px' }} />
+        <Typography variant='h5'>Oupss... résultats non trouvés</Typography>
+        <Typography variant='h6'>Veuillez sélectionner une autre commune</Typography>
+      </Box>
     );
   }
 
   return (
     <Box>
-      <Typography variant="h6" mt={6} mb={6}  style={{ textAlign: 'center' }}>Ménages selon la catégorie socioprofessionnelle de la personne de référence </Typography>
+      <Typography variant="h6" mt={6} mb={6} style={{ textAlign: 'center' }}>Ménages selon la catégorie socioprofessionnelle de la personne de référence </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box style={{ height: 600 }}>
@@ -194,19 +191,19 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
               data={[
                 {
                   x: chartData.map(row => row.category),
+                  y: chartData.map(row => row.NombreDeLogements),
+                  type: 'bar',
+                  name: 'Nombre de ménages',
+                  marker: { color: 'orange' },
+                  hovertemplate: '%{x}<br>Nombre de ménages: %{y:,}<extra></extra>'
+                },
+                {
+                  x: chartData.map(row => row.category),
                   y: chartData.map(row => row.Population),
                   type: 'bar',
                   name: 'Population',
                   marker: { color: 'blue' },
                   hovertemplate: '%{x}<br>Population: %{y:,}<extra></extra>'
-                },
-                {
-                  x: chartData.map(row => row.category),
-                  y: chartData.map(row => row.NombreDeLogements),
-                  type: 'bar',
-                  name: 'Nombre de Logements',
-                  marker: { color: 'orange' },
-                  hovertemplate: '%{x}<br>Nombre de Logements: %{y:,}<extra></extra>'
                 }
               ]}
               layout={{
@@ -230,17 +227,17 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
             <Table ref={tableRef}>
               <TableHead style={{ backgroundColor: 'grey' }}>
                 <TableRow>
-                  <TableCell style={{ color: 'white',  }}>Catégorie Socioprofessionnelle</TableCell>
-                  <TableCell style={{ color: 'white' }}>Population des ménages</TableCell>
-                  <TableCell style={{ color: 'white' }}>Nombre de Logements</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Catégorie Socioprofessionnelle</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Nombre de ménages</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Population des ménages</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {tableData.map((row, index) => (
                   <TableRow key={index} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell style={{ textAlign: 'center' }}>{row.category}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.Population)}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.NombreDeLogements)}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal' }}>{row.category}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal' }}>{formatNumber(row.NombreDeLogements)}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal' }}>{formatNumber(row.Population)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -248,6 +245,7 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
           </TableContainer>
         </Grid>
       </Grid>
+      <Typography variant="caption" style={{display: 'flex', justifyContent: 'flex-end', marginTop: '40px'}}> Source : Insee, RP2020 exploitation principale, géographie au 01/01/2023.</Typography>
     </Box>
   );
 });
