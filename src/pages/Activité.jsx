@@ -236,7 +236,7 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
               layout={{
                 title: '',
                 yaxis: {
-                  title: 'Nombre de personnes',
+                  title: 'Population',
                   titlefont: {
                     size: 13,
                     
