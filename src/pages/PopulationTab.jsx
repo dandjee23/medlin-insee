@@ -4,9 +4,9 @@ import { styled } from '@mui/system';
 import DownloadIcon from '@mui/icons-material/Download';
 import Population from './Population';
 import Menage from './Menage';
-import Emploi from './Emploi';
 import Activité from './Activité';
 import Logement from './Logement';
+import Formation from './Formation';
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#286AC7',
@@ -104,7 +104,7 @@ const PopulationTab = () => {
         {selectedTab === 1 && <Menage communeCodes={selectedCommunes} ref={menageRef} />}
         {selectedTab === 2 && <Activité communeCodes={selectedCommunes} ref={menageRef} />}
         {selectedTab === 3 && <Logement communeCodes={selectedCommunes} ref={menageRef} />}
-        {selectedTab === 4 && <Emploi communeCodes={selectedCommunes} ref={menageRef} />}
+        {selectedTab === 4 && <Formation communeCodes={selectedCommunes} ref={menageRef} />}
       </Box>
     </Box>
   );
