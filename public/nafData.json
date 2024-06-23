@@ -756,8 +756,14 @@
   ],
   "13.1": [
     { "value": "13.10", "label": "13.10 - Préparation de fibres textiles et filature" },
-    { "value": "13.20", "label": "13.20 - Tissage" },
-    { "value": "13.30", "label": "13.30 - Ennoblissement textile" },
+  ],
+  "13.2": [
+    { "value": "13.20", "label": "13.20 - Tissage" }
+  ],
+  "13.3": [
+    { "value": "13.30", "label": "13.30 - Ennoblissement textile" }
+  ],
+  "13.9": [
     { "value": "13.91", "label": "13.91 - Fabrication d'étoffes à mailles" },
     { "value": "13.92", "label": "13.92 - Fabrication d'articles textiles, sauf habillement" },
     { "value": "13.93", "label": "13.93 - Fabrication de tapis et de moquettes" },
