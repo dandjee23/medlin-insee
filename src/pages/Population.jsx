@@ -100,7 +100,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
   if (!ageSexData || !csSexData) {
     return (
       <Box>
-        <Skeleton variant="text" width="600px" height={40} style={{ width: '600px', marginLeft:'250px', marginTop: '20px' }} />
+        <Skeleton variant="text" width="600px" height={40} style={{ width: '600px', marginLeft:'250px', marginTop: '30px', marginBottom: '30px'  }} />
         <Grid container spacing={2} mt={4}>
           <Grid item xs={12} md={6}>
             <Box style={{ height: 400 }}>
@@ -113,8 +113,8 @@ const Population = forwardRef(({ communeCodes }, ref) => {
             </Box>
           </Grid>
         </Grid>
-        <Skeleton variant="text" width="100%" height={40} style={{marginTop: '40px', marginBottom: '60px'}}/>
-        <Grid container spacing={2} >
+        <Skeleton variant="text" width="600px" height={40} style={{ width: '600px', marginLeft:'250px', marginTop: '20px' }} />
+        <Grid container spacing={2} mt={4}>
         
           <Grid item xs={12} md={6}>
             <Box style={{ height: 400 }}>
@@ -282,7 +282,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
           </TableContainer>
         </Grid>
       </Grid>
-      <Typography variant="h6" style={{ textAlign: 'center' }}>Population selon le sexe et la tranche d'âge</Typography>
+      <Typography variant="h6" style={{ textAlign: 'center', marginTop: '20px' }}>Population selon le sexe et la tranche d'âge</Typography>
       <Grid container spacing={2} mt={4}>
         <Grid item xs={12} md={6}>
           <Box style={{ height: 500 }}>

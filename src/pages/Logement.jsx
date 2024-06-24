@@ -136,10 +136,10 @@ const Logement = forwardRef((props, ref) => {
     <Box style={{paddingLeft: '20px'}}>
       <Typography Typography variant="h6" mt={6} mb={6} style={{ textAlign: 'center' }}>Logements selon catégories et types de logements</Typography>
 
-      <Typography variant="h6" style={{ textAlign: '', marginTop: '50px', textDecoration: 'underline'  }}>Nombre de Logements</Typography>
+      <Typography variant="h7" style={{ textAlign: '', marginTop: '50px', textDecoration: 'underline'  }}>Nombre de Logements</Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <TableContainer component={Paper} style={{ maxWidth: '100%', margin: '0 auto' }}>
+          <TableContainer component={Paper} style={{ maxWidth: '100%', margin: '0 auto', marginBottom: '20px' }}>
             <Table>
               <TableHead style={{ backgroundColor: 'grey' }}>
                 <TableRow>
@@ -160,7 +160,7 @@ const Logement = forwardRef((props, ref) => {
       </Grid>
 
 
-      <Typography variant="h6" style={{ textAlign: '', textDecoration: 'underline', marginTop: '20px'  }}>Nombre de Pièces</Typography>
+      <Typography variant="h7" style={{ textAlign: '', textDecoration: 'underline', marginTop: '40px'  }}>Nombre de Pièces</Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TableContainer component={Paper} style={{ maxWidth: '100%', margin: '0 auto' }}>
