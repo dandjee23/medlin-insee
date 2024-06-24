@@ -594,7 +594,8 @@
       { "value": "97.0", "label": "97.0 - Activités des ménages en tant qu'employeurs de personnel domestique" }
     ],
     "98": [
-      { "value": "98.0", "label": "98.0 - Activités indifférenciées des ménages en tant que producteurs de biens et services pour usage propre" }
+      { "value": "98.1", "label": "98.1 - Activités indifférenciées des ménages en tant que producteurs de biens et services pour usage propre" },
+      { "value": "98.2", "label": "98.2 - Activités indifférenciées des ménages en tant que producteurs de services pour usage propre" }
     ],
     "99": [
       { "value": "99.0", "label": "99.0 - Activités des organisations et organismes extraterritoriaux" }

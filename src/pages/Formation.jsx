@@ -91,7 +91,16 @@ const Formation = forwardRef(({ communeCodes }, ref) => {
   }));
 
   if (loading) {
-    return <CircularProgress />;
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh', // Adjust the height as needed
+      }}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   const getCategories = (variables) => {
@@ -142,7 +151,7 @@ const Formation = forwardRef(({ communeCodes }, ref) => {
 
   return (
     <Box>
-      <Typography variant="h6" mt={6} mb={6} style={{ textAlign: 'center' }}>Formation selon le niveau de diplôme</Typography>
+      <Typography variant="h6" mt={6} mb={6} style={{ textAlign: 'center' }}>Diplôme le plus élevé de la population non scolarisée de 15 ans ou plus </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box style={{ height: 600 }}>
@@ -153,7 +162,7 @@ const Formation = forwardRef(({ communeCodes }, ref) => {
                   y: chartData.map(row => row.ensemble),
                   type: 'bar',
                   name: 'Ensemble',
-                  marker: { color: 'blue' },
+                  marker: { color: 'green' },
                   hovertemplate: '%{x}<br>Ensemble: %{y:,}<extra></extra>'
                 },
                 {
@@ -161,7 +170,7 @@ const Formation = forwardRef(({ communeCodes }, ref) => {
                   y: chartData.map(row => row.hommes),
                   type: 'bar',
                   name: 'Hommes',
-                  marker: { color: 'green' },
+                  marker: { color: 'blue' },
                   hovertemplate: '%{x}<br>Hommes: %{y:,}<extra></extra>'
                 },
                 {
@@ -169,7 +178,7 @@ const Formation = forwardRef(({ communeCodes }, ref) => {
                   y: chartData.map(row => row.femmes),
                   type: 'bar',
                   name: 'Femmes',
-                  marker: { color: 'red' },
+                  marker: { color: 'orange' },
                   hovertemplate: '%{x}<br>Femmes: %{y:,}<extra></extra>'
                 },
               ]}
@@ -195,18 +204,20 @@ const Formation = forwardRef(({ communeCodes }, ref) => {
               <TableHead style={{ backgroundColor: 'grey' }}>
                 <TableRow>
                   <TableCell style={{ color: 'white', textAlign: 'center' }}>Niveau de diplôme</TableCell>
-                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Ensemble</TableCell>
+                  
                   <TableCell style={{ color: 'white', textAlign: 'center' }}>Hommes</TableCell>
                   <TableCell style={{ color: 'white', textAlign: 'center' }}>Femmes</TableCell>
+                  <TableCell style={{ color: 'white', textAlign: 'center' }}>Ensemble</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {transformedData.map((row, index) => (
                   <TableRow key={index} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell style={{ textAlign: 'center' }}>{row.category}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.ensemble)}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.hommes)}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.femmes)}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{row.category}</TableCell>
+                    
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row.hommes)}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row.femmes)}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row.ensemble)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -214,6 +225,7 @@ const Formation = forwardRef(({ communeCodes }, ref) => {
           </TableContainer>
         </Grid>
       </Grid>
+      <Typography variant="caption" style={{display: 'flex', justifyContent: 'flex-end', marginTop: '40px'}}> Source : Insee, RP2020 exploitation principale, géographie au 01/01/2023.</Typography>
     </Box>
   );
 });

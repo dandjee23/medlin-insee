@@ -134,7 +134,7 @@ const Logement = forwardRef((props, ref) => {
 
   return (
     <Box style={{paddingLeft: '20px'}}>
-      <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '50px', marginTop: '30px' }}>Logements selon catégories et types de logements</Typography>
+      <Typography Typography variant="h6" mt={6} mb={6} style={{ textAlign: 'center' }}>Logements selon catégories et types de logements</Typography>
 
       <Typography variant="h6" style={{ textAlign: '', marginTop: '50px', textDecoration: 'underline'  }}>Nombre de Logements</Typography>
       <Grid container spacing={2}>

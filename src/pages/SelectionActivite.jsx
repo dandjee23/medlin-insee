@@ -186,6 +186,7 @@ const SelectionActivite = () => {
         <AlertTitle>Veuillez choisir ci-dessous l'activité souhaitée.</AlertTitle>
         Les menus se mettront à jour en fonction de votre choix précédent.
       </Alert>
+
       <Box component="form" marginTop={2}>
         <Grid container spacing={3}>
           <Grid item xs={12}>

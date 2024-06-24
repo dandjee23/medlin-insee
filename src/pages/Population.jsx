@@ -100,7 +100,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
   if (!ageSexData || !csSexData) {
     return (
       <Box>
-        <Skeleton variant="text" width="100%" height={40} />
+        <Skeleton variant="text" width="600px" height={40} style={{ width: '600px', marginLeft:'250px', marginTop: '20px' }} />
         <Grid container spacing={2} mt={4}>
           <Grid item xs={12} md={6}>
             <Box style={{ height: 400 }}>
@@ -233,7 +233,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
 
   return (
     <Box>
-      <Typography variant="h6" style={{ textAlign: 'center' }}>Répartition de la population selon le sexe</Typography>
+      <Typography variant="h6" mt={6} mb={6} style={{ textAlign: 'center' }}>Répartition de la population selon le sexe</Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box style={{ height: 400 }}>
@@ -353,10 +353,10 @@ const Population = forwardRef(({ communeCodes }, ref) => {
               <TableBody>
                 {ageGroups.map((code, index) => (
                   <TableRow key={code} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell style={{ textAlign: 'center' }}>{ageGroupLabels[code]}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(maleAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(femaleAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(totalAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: ageGroupLabels[code] === 'Ensemble' ? 'bold' : 'normal' }}>{ageGroupLabels[code]}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: ageGroupLabels[code] === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(maleAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: ageGroupLabels[code] === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(femaleAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: ageGroupLabels[code] === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(totalAgeDistribution[ageGroups.indexOf(code)])}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -439,10 +439,10 @@ const Population = forwardRef(({ communeCodes }, ref) => {
               <TableBody>
                 {tableData.map((row, index) => (
                   <TableRow key={row.category} style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-                    <TableCell style={{ textAlign: 'center' }}>{row.category}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.Homme)}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.Femme)}</TableCell>
-                    <TableCell style={{ textAlign: 'center' }}>{formatNumber(row.Ensemble)}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{row.category}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row.Homme)}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row.Femme)}</TableCell>
+                    <TableCell style={{ textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row.Ensemble)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

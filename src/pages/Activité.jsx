@@ -100,7 +100,7 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
   if (loading) {
     return (
       <Box>
-  <Skeleton variant="text" width="100%" height={40} />
+  <Skeleton variant="text" width="600px" mt={6} height={40} style={{ width: '600px', marginLeft:'250px', marginTop: '20px' }} />
   <Grid container spacing={2} mt={4}>
     <Grid item xs={12} md={6}>
       <Box style={{ height: 400 }}>
@@ -266,18 +266,20 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
               <TableHead style={{ backgroundColor: 'grey' }}>
                 <TableRow>
                   <TableCell style={{ color: 'white' }}>Catégorie Socioprofessionnelle</TableCell>
-                  <TableCell style={{ color: 'white' }}>Ensemble</TableCell>
+                  
                   <TableCell style={{ color: 'white' }}>Actifs ayant un emploi</TableCell>
                   <TableCell style={{ color: 'white' }}>Chômeurs</TableCell>
+                  <TableCell style={{ color: 'white' }}>Ensemble</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {tableData.map((row, index) => (
                   <TableRow key={index} style={{ backgroundColor: index % 2 === 0 ? 'lightgrey' : 'white' }}>
-                    <TableCell style={{textAlign: 'center' }}>{row.category}</TableCell>
-                    <TableCell style={{textAlign: 'center' }}>{formatNumber(row["Ensemble"] || 0)}</TableCell>
-                    <TableCell style={{textAlign: 'center' }}>{formatNumber(row["Actifs ayant un emploi"] || 0)}</TableCell>
-                    <TableCell style={{textAlign: 'center' }}>{formatNumber(row["Chômeurs"] || 0)}</TableCell>
+                    <TableCell style={{textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal' }}>{row.category}</TableCell>
+                    
+                    <TableCell style={{textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row["Actifs ayant un emploi"] || 0)}</TableCell>
+                    <TableCell style={{textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row["Chômeurs"] || 0)}</TableCell>
+                    <TableCell style={{textAlign: 'center', fontWeight: row.category === 'Ensemble' ? 'bold' : 'normal'  }}>{formatNumber(row["Ensemble"] || 0)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
