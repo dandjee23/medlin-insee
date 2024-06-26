@@ -21,8 +21,8 @@ const SyntheseRecherche = () => {
     const naf1 = localStorage.getItem('selectedNAF1');
     const communes = JSON.parse(localStorage.getItem('selectedCommunes')) || [];
     const communeNames = JSON.parse(localStorage.getItem('selectedCommuneNames')) || [];
-    console.log('Loaded communes from localStorage:', communes);
-    console.log('Loaded commune names from localStorage:', communeNames);
+    //console.log('Loaded communes from localStorage:', communes);
+    //console.log('Loaded commune names from localStorage:', communeNames);
     setSelectedNAF(naf ? naf.split(',') : []);
     setSelectedNAF1(naf1 ? naf1.split(',') : []);
     setSelectedCommunes(communes);

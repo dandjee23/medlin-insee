@@ -71,7 +71,7 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
       try {
         const activiteUrl = 'https://api.insee.fr/donnees-locales/V0.1/donnees/geo-CS1_6-TACTR_2@GEO2023RP2020/COM-{communeCode}.all.all';
         const mergedData = await fetchData(communeCodes, activiteUrl);
-        console.log('Fetched data:', JSON.stringify(mergedData, null, 2)); // Detailed log of fetched data
+        //console.log('Fetched data:', JSON.stringify(mergedData, null, 2)); // Detailed log of fetched data
         setData(mergedData);
         setLoading(false);
       } catch (error) {
@@ -176,7 +176,7 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
       }
     });
 
-    console.log('Transformed data for table:', JSON.stringify(categoryData, null, 2)); // Detailed log of transformed data
+    //console.log('Transformed data for table:', JSON.stringify(categoryData, null, 2)); // Detailed log of transformed data
 
     return Object.entries(categoryData).map(([csCode, values]) => ({
       category: values.category,
@@ -196,7 +196,7 @@ const Activité = forwardRef(({ communeCodes }, ref) => {
 
   const chartData = tableData.filter(row => row.category !== 'Ensemble');
 
-  console.log('Chart data:', chartData); // Detailed log of chart data
+  //console.log('Chart data:', chartData); // Detailed log of chart data
 
   if (chartData.length === 0 && tableData.length === 0) {
     return (

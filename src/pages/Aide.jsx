@@ -39,5 +39,5 @@ const Aide = memo(() => {
 
 export default Aide;
 
-//periode(activitePrincipaleEtablissement:70.22Z AND etatAdministratifEtablissement:A) AND codeCommuneEtablissement:69005
+//periode(activitePrincipaleEtablissement:70.22Z AND etatAdministratifEtablissement:A AND -dateFin:*) AND codeCommuneEtablissement:69005
 

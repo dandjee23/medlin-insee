@@ -63,7 +63,7 @@ const Formation = forwardRef(({ communeCodes }, ref) => {
       try {
         const formationUrl = 'https://api.insee.fr/donnees-locales/V0.1/donnees/geo-SEXE-DIPL_19@GEO2023RP2020/COM-{communeCode}.all.all';
         const mergedData = await fetchData(communeCodes, formationUrl);
-        console.log('Fetched data:', mergedData); // Debugging fetched data
+        //console.log('Fetched data:', mergedData); // Debugging fetched data
         setData(mergedData);
         setLoading(false);
       } catch (error) {

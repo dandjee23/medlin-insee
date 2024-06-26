@@ -64,7 +64,7 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
       try {
         const menageUrl = 'https://api.insee.fr/donnees-locales/V0.1/donnees/geo-CS1_8@GEO2023RP2020/COM-{communeCode}.all';
         const mergedData = await fetchData(communeCodes, menageUrl);
-        console.log('Fetched data:', mergedData); // Debugging fetched data
+        //console.log('Fetched data:', mergedData); // Debugging fetched data
         setData(mergedData);
         setLoading(false);
       } catch (error) {
@@ -150,7 +150,7 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
       }
     });
 
-    console.log('Transformed data for table:', categoryData); // Debugging transformed data
+    //console.log('Transformed data for table:', categoryData); // Debugging transformed data
 
     return Object.entries(categoryData).map(([csCode, values]) => ({
       category: categoryLabels[csCode],
@@ -169,7 +169,7 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
 
   const chartData = tableData.filter(row => row.category !== 'Ensemble');
 
-  console.log('Chart data:', chartData); // Debugging chart data
+  //console.log('Chart data:', chartData); // Debugging chart data
 
   if (chartData.length === 0 && tableData.length === 0) {
     return (

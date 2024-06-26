@@ -57,7 +57,7 @@ const parseData = (data) => {
     });
   });
 
-  console.log('Parsed data:', parsedData); // Log the parsed data
+  //console.log('Parsed data:', parsedData); // Log the parsed data
   return parsedData;
 };
 
@@ -78,7 +78,7 @@ const Logement = forwardRef((props, ref) => {
       try {
         const logementUrl = 'https://api.insee.fr/donnees-locales/V0.1/donnees/geo-TYPLR-CATL@GEO2023RP2020/COM-{communeCode}.all.all';
         const mergedData = await fetchData(props.communeCodes, logementUrl);
-        console.log('Fetched data:', mergedData); // Log fetched data for debugging
+        //console.log('Fetched data:', mergedData); // Log fetched data for debugging
         setData(parseData(mergedData));
       } catch (error) {
         console.error('Error fetching data:', error);

@@ -53,7 +53,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
     if (selectedNAF && selectedCommunes.length > 0) {
       const fetchEtablissements = selectedCommunes.map(commune => {
         const codeCommune = commune.value;
-        return fetch(`https://api.insee.fr/entreprises/sirene/V3.11/siret?q=periode(activitePrincipaleEtablissement%3A${selectedNAF}%20AND%20etatAdministratifEtablissement%3AA)%20AND%20codeCommuneEtablissement%3A${codeCommune}`, {
+        return fetch(`https://api.insee.fr/entreprises/sirene/V3.11/siret?q=periode(activitePrincipaleEtablissement%3A${selectedNAF}%20AND%20etatAdministratifEtablissement%3AA%20AND%20-dateFin%3A*)%20AND%20codeCommuneEtablissement%3A${codeCommune}`, {
           headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer c1962a62-85fd-3e69-94a8-9a23ea7306a6'
@@ -104,7 +104,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
     }
     try {
       const [lng, lat] = proj4(lambert93, wgs84, [x, y]);
-      console.log('Converted coordinates:', { x, y, lat, lng });
+      //console.log('Converted coordinates:', { x, y, lat, lng });
       return [lat, lng];
     } catch (error) {
       console.error('Error converting coordinates:', error);
@@ -144,6 +144,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
       commune: `${replaceNDWithUndefined(adresseEtablissement.codeCommuneEtablissement)}, ${replaceNDWithUndefined(adresseEtablissement.libelleCommuneEtablissement)}`,
       tranchEffectifEtablissement: tranchEffectifsEtablissement[replaceNDWithUndefined(uniteLegale?.trancheEffectifsUniteLegale)] || 'Non renseigné',
       categorieEntreprise: replaceNDWithUndefined(uniteLegale?.categorieEntreprise) || 'Non défini',
+      activitePrincipale: replaceNDWithUndefined(periodesEtablissement[0]?.activitePrincipaleEtablissement),
       coords: coords
     };
   };
@@ -298,6 +299,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
                     <strong style={{ color: 'blue' }}>Commune: </strong> {transformedData.commune}<br />
                     <strong style={{ color: 'blue' }}>Effectif: </strong> {transformedData.tranchEffectifEtablissement}<br />
                     <strong style={{ color: 'blue' }}>Catégorie: </strong> {transformedData.categorieEntreprise}<br />
+                    <strong style={{ color: 'blue' }}>APE: </strong> {transformedData.activitePrincipale}<br />
                   </Popup>
                 </Marker>
               );
@@ -314,6 +316,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
               <TableCell style={{ color: 'white' }}>Commune</TableCell>
               <TableCell style={{ color: 'white' }}>Tranche Effectifs</TableCell>
               <TableCell style={{ color: 'white' }}>Catégorie</TableCell>
+              <TableCell style={{ color: 'white' }}>Activité principale</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -327,6 +330,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
                   <TableCell>{transformedData.commune}</TableCell>
                   <TableCell>{transformedData.tranchEffectifEtablissement}</TableCell>
                   <TableCell>{transformedData.categorieEntreprise}</TableCell>
+                  <TableCell>{transformedData.activitePrincipale}</TableCell>
                 </TableRow>
               );
             })}
