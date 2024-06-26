@@ -183,7 +183,8 @@ const SelectionActivite = () => {
             variant="contained"
             color="primary"
             onClick={handleNext}
-            //endIcon={<NavigateNextIcon />}
+            //endIcon={<ValidateIcon />}
+            
             style={{ borderRadius: '8px', textTransform: 'none' }}
           >
             Valider
