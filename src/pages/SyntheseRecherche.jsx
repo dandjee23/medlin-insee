@@ -122,7 +122,6 @@ const SyntheseRecherche = () => {
       {tabIndex === 1 && (
         <div style={{ backgroundColor: 'white', marginTop: '16px', padding: '16px' }}>
         <EntreprisesTab ref={entreprisesRef} selectedNAF={selectedNAF} selectedCommunes={selectedCommunes} />
-
         </div>
       )}
     </Container>
