@@ -1928,20 +1928,23 @@
     { "value": "10.51A", "label": "10.51A - Fabrication de lait liquide et de produits frais" },
     { "value": "10.51B", "label": "10.51B - Fabrication de beurre" },
     { "value": "10.51C", "label": "10.51C - Fabrication de fromage" },
-    { "value": "10.51D", "label": "10.51D - Fabrication de lait en poudre" },
-    { "value": "10.51E", "label": "10.51E - Fabrication d'autres produits laitiers" }
+    { "value": "10.51D", "label": "10.51E - Fabrication d'autres produits laitiers" }
   ],
   "10.52": [
     { "value": "10.52Z", "label": "10.52Z - Fabrication de glaces et sorbets" }
   ],
   "10.61": [
-    { "value": "10.61Z", "label": "10.61Z - Travail des grains" }
+    { "value": "10.61A", "label": "10.61A - Meunerie" },
+    { "value": "10.61B", "label": "10.61B - Autres activités du travail des grains" }
   ],
   "10.62": [
     { "value": "10.62Z", "label": "10.62Z - Fabrication de produits amylacés" }
   ],
   "10.71": [
-    { "value": "10.71Z", "label": "10.71Z - Fabrication de pain et de pâtisserie fraîche" }
+    { "value": "10.71A", "label": "10.71A - Fabrication industrielle de pain et de pâtisserie fraîche" },
+    { "value": "10.71B", "label": "10.71B - Cuisson de produits de boulangerie" },
+    { "value": "10.71C", "label": "10.71C - Boulangerie et boulangerie-pâtisserie" },
+    { "value": "10.71D", "label": "10.71D - Pâtisserie" }
   ],
   "10.72": [
     { "value": "10.72Z", "label": "10.72Z - Fabrication de biscottes, de biscuits et de pâtisseries de conservation" }
@@ -1996,7 +1999,8 @@
     { "value": "11.06Z", "label": "11.06Z - Fabrication de malt" }
   ],
   "11.07": [
-    { "value": "11.07Z", "label": "11.07Z - Industrie des eaux de table" }
+    { "value": "11.07A", "label": "11.07A - Industrie des eaux de table" },
+    { "value": "11.07B", "label": "11.07B - Production de boissons rafraîchissantes" }
   ],
   "12.00": [
     { "value": "12.00Z", "label": "12.00Z - Fabrication de produits à base de tabac" }
