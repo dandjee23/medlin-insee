@@ -201,9 +201,9 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
                   x: chartData.map(row => row.category),
                   y: chartData.map(row => row.Population),
                   type: 'bar',
-                  name: 'Population',
+                  name: 'Population des ménages',
                   marker: { color: 'blue' },
-                  hovertemplate: '%{x}<br>Population: %{y:,}<extra></extra>'
+                  hovertemplate: '%{x}<br>Population des ménages: %{y:,}<extra></extra>'
                 }
               ]}
               layout={{

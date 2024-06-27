@@ -311,8 +311,8 @@ const handleDownload = () => {
                     <strong style={{ color: 'blue' }}>Dénomination: </strong> {transformedData.denomination}<br />
                     <strong style={{ color: 'blue' }}>Adresse: </strong> {transformedData.adresse}<br />
                     <strong style={{ color: 'blue' }}>Commune: </strong> {transformedData.commune}<br />
-                    <strong style={{ color: 'blue' }}>Effectif: </strong> {transformedData.tranchEffectifEtablissement}<br />
-                    <strong style={{ color: 'blue' }}>Catégorie: </strong> {transformedData.categorieEntreprise}<br />
+                    <strong style={{ color: 'blue' }}>Effectif d'entreprise: </strong> {transformedData.tranchEffectifEtablissement}<br />
+                    <strong style={{ color: 'blue' }}>Catégorie d'entreprise: </strong> {transformedData.categorieEntreprise}<br />
                     <strong style={{ color: 'blue' }}>APE: </strong> {transformedData.activitePrincipale}<br />
                   </Popup>
                 </Marker>
@@ -328,9 +328,9 @@ const handleDownload = () => {
               <TableCell style={{ color: 'white' }}>Dénomination</TableCell>
               <TableCell style={{ color: 'white' }}>Adresse</TableCell>
               <TableCell style={{ color: 'white' }}>Commune</TableCell>
-              <TableCell style={{ color: 'white' }}>Tranche Effectifs</TableCell>
-              <TableCell style={{ color: 'white' }}>Catégorie</TableCell>
-              <TableCell style={{ color: 'white' }}>Activité principale</TableCell>
+              <TableCell style={{ color: 'white' }}>Tranche effectif d'entreprise</TableCell>
+              <TableCell style={{ color: 'white' }}>Catégorie d'entreprise</TableCell>
+              <TableCell style={{ color: 'white' }}>APE</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
