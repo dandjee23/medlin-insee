@@ -162,7 +162,7 @@ const SelectionActivite = () => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom style={{ color: '#286AC7' }}>
-              Secteurs d'activité
+              Secteurs d'activité (NAF/APE)<span style={{ color: '#e4003a' }}>*</span>
             </Typography>
             <FormControl fullWidth>
               <Select

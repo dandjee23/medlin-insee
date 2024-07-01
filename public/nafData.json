@@ -2770,7 +2770,8 @@
     { "value": "46.16Z", "label": "46.16Z - Intermédiaires du commerce en textiles, habillement, fourrures, chaussures et articles en cuir" }
   ],
   "46.17": [
-    { "value": "46.17Z", "label": "46.17Z - Intermédiaires du commerce en denrées, boissons et tabac" }
+    { "value": "46.17A", "label": "46.17A - Centrales d'achat alimentaires" },
+    { "value": "46.17B", "label": "46.17B - Autres intermédiaires du commerce en denrées, boissons et tabac" }
   ],
   "46.18": [
     { "value": "46.18Z", "label": "46.18Z - Intermédiaires spécialisés dans le commerce d'autres produits spécifiques" }

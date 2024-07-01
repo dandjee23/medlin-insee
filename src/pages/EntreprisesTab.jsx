@@ -53,7 +53,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
     if (selectedNAF && selectedCommunes.length > 0) {
       const fetchEtablissements = selectedCommunes.map(commune => {
         const codeCommune = commune.value;
-        return fetch(`https://api.insee.fr/entreprises/sirene/V3.11/siret?q=periode(activitePrincipaleEtablissement%3A${selectedNAF}%20AND%20etatAdministratifEtablissement%3AA%20AND%20-dateFin%3A*)%20AND%20codeCommuneEtablissement%3A${codeCommune}`, {
+        return fetch(`https://api.insee.fr/entreprises/sirene/V3.11/siret?q=periode(activitePrincipaleEtablissement%3A${selectedNAF}%20AND%20etatAdministratifEtablissement%3AA%20AND%20-dateFin%3A*)%20AND%20codeCommuneEtablissement%3A${codeCommune}&nombre=1000`, {
           headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer c1962a62-85fd-3e69-94a8-9a23ea7306a6'
@@ -133,7 +133,7 @@ const EntreprisesTab = forwardRef(({ selectedNAF, selectedCommunes }, ref) => {
     const prenom = replaceNDWithUndefined(uniteLegale?.prenom1UniteLegale);
     const nom = replaceNDWithUndefined(uniteLegale?.nomUniteLegale);
 
-    let denomination = 'Indisponible';
+    let denomination = '';
 
     if (denominationUsuelle && denominationUsuelle !== "Non défini") {
         denomination = denominationUsuelle;
