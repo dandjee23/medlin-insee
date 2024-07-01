@@ -100,7 +100,7 @@ const Population = forwardRef(({ communeCodes }, ref) => {
   if (!ageSexData || !csSexData) {
     return (
       <Box>
-        <Skeleton variant="text" width="600px" height={40} style={{ width: '600px', marginLeft:'180px', marginTop: '30px', marginBottom: '30px'  }} />
+        <Skeleton variant="text" width="600px" height={40} style={{ width: '600px', marginLeft:'250px', marginTop: '30px', marginBottom: '30px'  }} />
         <Grid container spacing={2} mt={4}>
           <Grid item xs={12} md={6}>
             <Box style={{ height: 400 }}>

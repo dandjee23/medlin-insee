@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Box, Grid, FormControl, Skeleton, Snackbar, Button, IconButton, Alert, AlertTitle, Paper } from '@mui/material';
 import Select from 'react-select';
+//import makeAnimated from 'react-select/animated';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
+//const animatedComponents = makeAnimated();
+
 const SelectionActivite = () => {
   const [data, setData] = useState(null);
   const [selectedSubclasses, setSelectedSubclasses] = useState(localStorage.getItem('selectedSubclasses') ? JSON.parse(localStorage.getItem('selectedSubclasses')) : []);
+  const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -116,7 +120,7 @@ const SelectionActivite = () => {
       </Box>
 
       {selectedSubclasses.length > 0 && (
-        <Paper elevation={3} style={{ padding: '10px 16px', marginBottom: '16px', borderRadius: '8px', borderLeft: '5px solid #286AC7' }}>
+        <Paper elevation={3} style={{ padding: '10px 16px', marginBottom: '16px', borderRadius: '8px', borderLeft: '5px solid #286AC7', maxHeight: '150px', overflowY: 'auto' }}>
           <Box display="flex" alignItems="center" justifyContent="space-between">
             <Typography variant="body1" style={{ fontWeight: 500 }}>
               <span style={{ color: '#286AC7' }}>Vous avez choisi l'activité :</span> {selectedSubclasses.map(subclass => subclass.label).join(', ')}
@@ -154,20 +158,28 @@ const SelectionActivite = () => {
         </Typography>
       </Alert>
 
-      <Box component="form" marginTop={2}>
+      <Box component="form" marginTop={2} >
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom style={{ color: '#286AC7' }}>
-              Secteurs d'activité (NAF/APE)<span style={{ color: '#e4003a' }}>*</span>
+              Secteurs d'activité
             </Typography>
             <FormControl fullWidth>
               <Select
                 value={selectedSubclasses}
                 onChange={handleSubclassChange}
                 options={subclassesOptions}
-                placeholder="code ou libellé..."
+                //components={animatedComponents}
+                closeMenuOnSelect={false}
+                placeholder="code ou libellé"
                 isSearchable
                 isMulti
+                inputValue={inputValue}
+                onInputChange={(newValue, actionMeta) => {
+                  if (actionMeta.action !== 'set-value') {
+                    setInputValue(newValue);
+                  }
+                }}
                 styles={{
                   control: (base) => ({
                     ...base,
@@ -183,8 +195,6 @@ const SelectionActivite = () => {
             variant="contained"
             color="primary"
             onClick={handleNext}
-            //endIcon={<ValidateIcon />}
-            
             style={{ borderRadius: '8px', textTransform: 'none' }}
           >
             Valider

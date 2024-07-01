@@ -93,7 +93,7 @@ const Menage = forwardRef(({ communeCodes }, ref) => {
   if (loading) {
     return (
       <Box>
-        <Skeleton variant="text" width="600px" height={40} style={{ width: '600px', marginLeft:'180px',  marginTop: '20px' }} />
+        <Skeleton variant="text" width="600px" height={40} style={{ width: '600px', marginLeft:'260px',  marginTop: '20px' }} />
         <Grid container spacing={2} mt={4}>
           <Grid item xs={12} md={6}>
             <Box style={{ height: 400 }}>
